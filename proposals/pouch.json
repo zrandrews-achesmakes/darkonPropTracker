@@ -3,7 +3,7 @@
   "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1527815954396872844",
   "doc_url": "https://docs.google.com/document/d/1EVO4LnP9uUd0AHErrfhev9u5pc6v9qQg8bg2lPI-TqM/edit?usp=sharing",
   "easypoll_blocks": [
-    "/poll question: Pouch Prop by Up-Chuk\ntext:\nAuthor: Up-Chuk\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1527815954396872844\nDoc: https://docs.google.com/document/d/1EVO4LnP9uUd0AHErrfhev9u5pc6v9qQg8bg2lPI-TqM/edit?usp=sharing\nSummary:\n- Allows casting Pouch while already holding a spell.\n- If Pouch is interrupted, the held spell activates on the caster.\n- Standardizes 'stored/held' terminology to 'pouched'.\n- Still one pouched spell at a time, and only the caster can invoke it.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+    "/poll question: Pouch Prop by Up-Chuk\ntext:\nAuthor: Up-Chuk\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1527815954396872844\nDoc: <https://docs.google.com/document/d/1EVO4LnP9uUd0AHErrfhev9u5pc6v9qQg8bg2lPI-TqM/edit?usp=sharing>\nSummary:\n- Allows casting Pouch while already holding a spell.\n- If Pouch is interrupted, the held spell activates on the caster.\n- Standardizes 'stored/held' terminology to 'pouched'.\n- Still one pouched spell at a time, and only the caster can invoke it.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
   ],
   "id": "pouch",
   "line_items": [],
