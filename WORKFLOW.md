@@ -98,7 +98,7 @@ Discord's `/poll` command:
 | Field | Value |
 |---|---|
 | `question` | "<Proposal name> by <Author>" |
-| `text` | author, post link, doc link, then the bullet summary (this text appears above the poll) |
+| `text` | author, post link, doc link wrapped in `< >` (suppresses the Discord link preview), then the bullet summary (this text appears above the poll) |
 | `answer-1` | "Yes" |
 | `answer-2` | "No" |
 | `answer-3` | "Abstain" |
