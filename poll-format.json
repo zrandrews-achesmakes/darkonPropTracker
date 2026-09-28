@@ -1,0 +1,22 @@
+{
+  "command": "/poll",
+  "source": "https://easypoll.com/commands",
+  "usage": "Type /poll in Discord and paste each value into the matching field.",
+  "options": [
+    "Yes",
+    "No",
+    "Abstain"
+  ],
+  "option_rules": [
+    "Vote options are exactly Yes / No / Abstain.",
+    "A No vote carries no 'needs revision' qualifier."
+  ],
+  "fields": {
+    "question": "<Proposal name> by <Author> — send to Senate vote?",
+    "text": "Author, Discord post link, Google Doc link, then the bullet summary (up to 5 bullets). This text appears above the poll.",
+    "answer-1": "Yes",
+    "answer-2": "No",
+    "answer-3": "Abstain"
+  },
+  "line_item_rule": "If the proposal has separable line items needing their own votes, generate one poll block per line item (the question names the line item) instead of a single combined block. Call the line items out after the summary bullets."
+}
