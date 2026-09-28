@@ -1,7 +1,7 @@
 {
   "command": "/poll",
   "source": "https://easypoll.com/commands",
-  "usage": "Each block begins with /poll on its own line. Type /poll in Discord and paste each value into the matching field.",
+  "usage": "Each block begins with '/poll ' followed by the question on the same line. Type /poll in Discord and paste each value into the matching field.",
   "options": [
     "Yes",
     "No",
@@ -19,5 +19,5 @@
     "answer-3": "Abstain"
   },
   "line_item_rule": "If the proposal has separable line items needing their own votes, generate one poll block per line item (the question names the line item) instead of a single combined block. Call the line items out after the summary bullets.",
-  "prefix": "/poll"
+  "prefix": "/poll "
 }
