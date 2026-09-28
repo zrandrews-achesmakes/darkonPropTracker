@@ -7,6 +7,7 @@ One JSON file per proposal in this directory, named `<id>.json`.
 | Field | Type | Description |
 |---|---|---|
 | `id` | string | URL-safe slug, unique per proposal. |
+| `hidden` | boolean | Optional. When `true`, hides the proposal from the board. Defaults to `false`; omitted means visible. |
 | `name` | string | Proposal title. |
 | `author` | string | Proposal author (Discord display name). |
 | `posted_by` | string | Who posted it in #proposal-discussions (may differ from author). |
