@@ -2,16 +2,18 @@
   "author": "ZiggityCheese",
   "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1553806448226734080",
   "doc_url": "https://docs.google.com/document/d/1H6B4d6VnygHlg2qe6rhvOqgUWL-ZQUqa95kJFrUQbZw/edit?usp=drivesdk",
-  "easypoll_blocks": [],
+  "easypoll_blocks": [
+    "/poll question: Darkon Bot Test Prop by ZiggityCheese\ntext:\nAuthor: ZiggityCheese\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1553806448226734080\nDoc: https://docs.google.com/document/d/1H6B4d6VnygHlg2qe6rhvOqgUWL-ZQUqa95kJFrUQbZw/edit?usp=drivesdk\nSummary:\n- Test post by ZiggityCheese for his proposal-tracking automation; explicitly not a real proposal.\n- Linked doc contains no rule changes, no old/new wording, and no rationale beyond testing the bot.\n- No line items; nothing here would require a Senate vote.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+  ],
   "id": "darkon-bot-test-prop",
   "line_items": [],
   "name": "Darkon Bot Test Prop",
-  "notes": "TEST RECORD — not a real Senate proposal. ZiggityCheese posted this to test his own proposal-tracking automation (\"Sorry for the testing spam\"). The linked doc contains only the title and the line \"This is not a real proposal, just a test of the Darkon proposal monitor bot.\" No rule changes, no vote needed. Zachary asked that it be tracked rather than ignored. Status set to canceled by Zachary via the private editor on 2026-09-27.",
+  "notes": "TEST RECORD — not a real Senate proposal. ZiggityCheese posted this to test his own proposal-tracking automation (\"Sorry for the testing spam\"). The linked doc contains only the title and the line \"This is not a real proposal, just a test of the Darkon proposal monitor bot.\" No rule changes, no vote needed. Zachary asked that it be tracked rather than ignored. Status was briefly set to canceled via the private editor on 2026-09-27, then moved back to new at Zachary’s request the same day.",
   "posted_at": "2026-09-27T16:32:05Z",
   "posted_by": "ZiggityCheese",
   "posted_by_username": "ziggitycheese",
   "presented_at_senate": null,
-  "status": "canceled",
+  "status": "new",
   "summary": [
     "Test post by ZiggityCheese for his proposal-tracking automation; explicitly not a real proposal.",
     "Linked doc contains no rule changes, no old/new wording, and no rationale beyond testing the bot.",
