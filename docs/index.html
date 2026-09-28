@@ -252,7 +252,7 @@ function buildAgenda(){
   const formatProposal=p=>[
     `### ${p.name||p.id}`,
     `**Author:** *${p.author||'—'}*`,
-    `**Link to Proposal:** ${p.doc_url||'—'}`
+    `**Link to Proposal:** ${p.doc_url ? `<${p.doc_url}>` : '—'}`
   ].join('\n');
   const section=list=>list.length
     ? list.map(formatProposal).join('\n\n')
