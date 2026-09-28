@@ -195,6 +195,15 @@
       "actor": "zachary",
       "at": "2026-09-28T02:51:51Z",
       "note": "Zachary asked Navi to mark it passed."
+    },
+    {
+      "at": "2026-09-28T11:53:48Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "status_change",
+      "from": "new",
+      "to": "withdrawn",
+      "actor": "zachary",
+      "note": "Withdrawn per Zachary, 2026-09-28."
     }
   ]
 }
