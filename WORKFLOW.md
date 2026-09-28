@@ -10,34 +10,38 @@ Discord since the last Senate session, summarized and ready to poll.
 (If these ever stop working, re-resolve with `discord resolve --guild 766364534495117383 --name <channel>`.)
 
 ## Steps
-1. **Last Senate.** Read `state.json` for `last_senate` (currently
-   2026-08-08). Cross-check against the public schedule at
-   https://www.darkon.org/index.php/events/ (Senate meets online on the
-   Darkon Discord, second Saturday of every other month at noon, plus an
-   Election Senate in May). If a scheduled Senate newer than `last_senate`
-   has passed, read #agenda-presenting
-   (`discord read --channel 1144757403145998467 --all --chronological`) to
-   confirm it happened and covered proposals — skip special sessions with
-   no props (e.g. the 2026-09-13 awards-voting special) — and update
-   `last_senate` in `state.json`.
-   **Status transitions.** Whenever #agenda-presenting is read (step 1, or
-   any manual check), cross-reference existing proposals: any proposal with
-   status `new` that appears as presented at a Senate moves to `presented`
-   — set `presented_at_senate` to that Senate's date and append a
-   `status_change` event to `history.json` (actor: `workflow`). Match Google
-   Doc links by document ID (the `/d/<id>/` portion — suffixes like `/edit`
-   or `?usp=sharing` vary). If a doc link in #agenda-presenting matches no
-   tracked proposal, open it (read-only) and scan for outbound Google Doc
-   links — the Senate may post one agenda doc that hyperlinks to the
-   individual proposal docs. Any outbound link matching a tracked
-   proposal's doc ID counts as that proposal being presented. Only if
-   neither the doc itself nor anything it links to matches does it count
-   as a proposal that went straight to the agenda: process it as a new
-   proposal (create the JSON as `new`), then immediately apply the
-   `new` → `presented` transition with a `status_change` event so the audit
-   trail stays complete. Never touch a `canceled` proposal. This is the
-   only automated forward transition besides creation; votes and outcomes
-   still require explicit confirmation.
+## Step 1 — Determine the last Senate and update proposal statuses
+
+### 1a. Load the last known Senate
+Read `state.json` → `last_senate` (currently 2026-08-08).
+
+### 1b. Check whether a newer Senate has happened
+Public schedule: https://www.darkon.org/index.php/events/
+Senate meets online on the Darkon Discord, second Saturday of every other
+month at noon, plus an Election Senate in May.
+
+- If no scheduled Senate is newer than `last_senate`, skip to 1c.
+- If one has passed, read #agenda-presenting
+  (`discord read --channel 1144757403145998467 --all --chronological`)
+  and confirm it actually happened and covered proposals.
+  - Skip special sessions with no props (e.g. the 2026-09-13
+    awards-voting special) — they never become `last_senate`.
+  - Otherwise update `last_senate` in `state.json`.
+
+### 1c. Move presented proposals forward
+Whenever #agenda-presenting is read (here, or any manual check),
+cross-reference every proposal against it:
+
+| What you find | What to do |
+|---|---|
+| Tracked proposal with status `new` appears as presented | → `presented`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). |
+| Doc link whose document ID matches a tracked `new` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
+| Doc link matching nothing tracked | Open it (read-only) and scan for outbound Google Doc links — the Senate may post one agenda doc linking to the individual proposal docs. Any outbound link matching a tracked proposal counts as presented. |
+| Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `new`, then immediately apply `new` → `presented` with a `status_change` event. |
+| Anything matching a `canceled` proposal | Leave it alone. Never resurrect. |
+
+This `new` → `presented` move is the only automated forward transition
+besides creation. Votes and outcomes still require explicit confirmation.
 2. **Scan window.** Start at `scan_since_override` in `state.json` when
    Zachary has set one (one-shot: clear it after the run consumes it);
    otherwise start at `last_review` (the previous scheduled run). On the
