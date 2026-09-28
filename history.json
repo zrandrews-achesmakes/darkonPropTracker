@@ -186,6 +186,15 @@
       "actor": "zachary",
       "at": "2026-09-28T02:44:01Z",
       "note": "Zachary asked Navi to mark the test record withdrawn."
+    },
+    {
+      "type": "status_change",
+      "proposal_id": "shoe-color",
+      "from": "voted",
+      "to": "passed",
+      "actor": "zachary",
+      "at": "2026-09-28T02:51:51Z",
+      "note": "Zachary asked Navi to mark it passed."
     }
   ]
 }
