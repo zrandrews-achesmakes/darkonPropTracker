@@ -138,13 +138,28 @@ async function load(){
   const board=document.getElementById('board');
   board.innerHTML='<div class="status-msg">Loading proposals from the tracker repo…</div>';
   try{
-    const tree=await (await fetch(TREE_URL)).json();
+    const cacheBust=Date.now();
+
+    const tree=await (
+      await fetch(`${TREE_URL}&_=${cacheBust}`, {
+        cache: 'no-store'
+      })
+    ).json();
+
     if(!tree.tree) throw new Error('tree unavailable');
+
     const files=tree.tree
       .filter(n=>n.type==='blob' && n.path.startsWith('proposals/') && n.path.endsWith('.json'))
       .map(n=>n.path).sort();
+
     const proposals=(await Promise.all(files.map(async f=>{
-      try{ const r=await fetch(rawUrl(f)); if(!r.ok) return null; return await r.json(); }
+      try{
+        const r=await fetch(`${rawUrl(f)}?v=${cacheBust}`, {
+          cache: 'no-store'
+        });
+        if(!r.ok) return null;
+        return await r.json();
+      }
       catch(e){ return null; }
     }))).filter(p=>p && p.hidden!==true);
 
