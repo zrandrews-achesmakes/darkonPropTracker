@@ -80,7 +80,6 @@
 const OWNER='zrandrews-achesmakes', REPO='darkonPropTracker', BRANCH='main';
 const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
 const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
-const TEST_FILE='proposals/darkon-bot-test-prop.json';
 
 const COLUMNS=[
   ['new','New','var(--new)'],['presented','Presented','var(--presented)'],
@@ -142,12 +141,12 @@ async function load(){
     const tree=await (await fetch(TREE_URL)).json();
     if(!tree.tree) throw new Error('tree unavailable');
     const files=tree.tree
-      .filter(n=>n.type==='blob' && n.path.startsWith('proposals/') && n.path.endsWith('.json') && n.path!==TEST_FILE)
+      .filter(n=>n.type==='blob' && n.path.startsWith('proposals/') && n.path.endsWith('.json'))
       .map(n=>n.path).sort();
     const proposals=(await Promise.all(files.map(async f=>{
       try{ const r=await fetch(rawUrl(f)); if(!r.ok) return null; return await r.json(); }
       catch(e){ return null; }
-    }))).filter(Boolean);
+    }))).filter(p=>p && p.hidden!==true);
 
     const buckets={}; COLUMNS.forEach(c=>buckets[c[0]]=[]);
     const extra=[];
