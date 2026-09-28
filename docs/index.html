@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Darkon Proposals — Senate Board</title>
+<style>
+  :root{
+    --bg:#14161c; --panel:#1d2029; --card:#242936; --line:#333a4d;
+    --text:#e8eaf0; --muted:#9aa3b8; --accent:#d8a93f;
+    --new:#6aa8ff; --presented:#b48cff; --scheduled:#ffcf5c;
+    --voted:#7fe0c3; --passed:#6fd98a; --failed:#ff8a8a;
+    --playtest:#5cd6ff; --withdrawn:#a8adbd; --canceled:#6b7280;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  header{padding:18px 24px;border-bottom:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between}
+  h1{margin:0;font-size:22px;letter-spacing:.3px}
+  h1 .crown{color:var(--accent)}
+  .sub{color:var(--muted);font-size:13px;margin-top:4px}
+  .controls{display:flex;gap:10px;align-items:center}
+  button{background:var(--card);color:var(--text);border:1px solid var(--line);
+    border-radius:8px;padding:8px 14px;cursor:pointer;font-size:14px}
+  button:hover{border-color:var(--accent)}
+  a{color:var(--accent)}
+  main{display:flex;gap:14px;overflow-x:auto;padding:20px 24px 40px;align-items:flex-start;min-height:60vh}
+  .col{flex:0 0 320px;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;display:flex;flex-direction:column;max-height:calc(100vh - 220px)}
+  .col-head{padding:12px 14px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;position:sticky;top:0}
+  .col-title{font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.6px}
+  .count{background:var(--card);border:1px solid var(--line);border-radius:20px;
+    padding:2px 10px;font-size:12px;color:var(--muted)}
+  .cards{padding:12px;display:flex;flex-direction:column;gap:12px;overflow-y:auto}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px}
+  .card h3{margin:0 0 6px;font-size:16px}
+  .meta{font-size:12.5px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+  .pill{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;
+    letter-spacing:.5px;border-radius:6px;padding:2px 8px;margin-bottom:8px;color:#10131a}
+  .summary{margin:8px 0;padding-left:18px;font-size:13.5px;line-height:1.55}
+  .summary li{margin-bottom:5px}
+  .links{display:flex;gap:12px;margin:10px 0;font-size:13px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+  .chip{font-size:11.5px;background:var(--panel);border:1px solid var(--line);
+    border-radius:20px;padding:3px 10px;color:var(--muted)}
+  details{margin-top:10px;font-size:13px}
+  summary{cursor:pointer;color:var(--accent);font-weight:600}
+  .poll{position:relative;background:#10131a;border:1px solid var(--line);
+    border-radius:8px;padding:10px;margin:8px 0 4px}
+  .poll pre{white-space:pre-wrap;word-break:break-word;margin:0 0 8px;
+    font-size:12px;color:var(--text);max-height:220px;overflow-y:auto}
+  .copy{font-size:12px;padding:5px 10px}
+  .notes{font-size:12.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .foot{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6}
+  .status-msg{padding:40px;text-align:center;color:var(--muted);font-size:15px;width:100%}
+  .status-msg.error{color:#ff9a9a}
+  footer{padding:14px 24px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1><span class="crown">♛</span> Darkon Proposals — Senate Board</h1>
+    <div class="sub">Live view of the proposal tracker. Read-only — updates land here automatically.</div>
+  </div>
+  <div class="controls">
+    <span class="sub" id="updated"></span>
+    <button id="refresh" type="button">↻ Refresh</button>
+  </div>
+</header>
+<main id="board"><div class="status-msg" id="loading">Loading proposals from the tracker repo…</div></main>
+<footer>
+  <span>Data: <a href="https://github.com/zrandrews-achesmakes/darkonPropTracker" target="_blank" rel="noopener">zrandrews-achesmakes/darkonPropTracker</a> (public)</span>
+  <span id="counts"></span>
+</footer>
+<script>
+const OWNER='zrandrews-achesmakes', REPO='darkonPropTracker', BRANCH='main';
+const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
+const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
+const TEST_FILE='proposals/darkon-bot-test-prop.json';
+
+const COLUMNS=[
+  ['new','New','var(--new)'],['presented','Presented','var(--presented)'],
+  ['scheduled','Scheduled','var(--scheduled)'],['voted','Voted','var(--voted)'],
+  ['passed','Passed','var(--passed)'],['failed','Failed','var(--failed)'],
+  ['playtest','Playtest','var(--playtest)'],['withdrawn','Withdrawn','var(--withdrawn)'],
+  ['canceled','Canceled','var(--canceled)']
+];
+
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtDate=d=>{ if(!d) return ''; const t=new Date(d.length<=10?d+'T12:00:00Z':d);
+  return isNaN(t)?esc(d):t.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'}); };
+
+async function copyText(btn,text){
+  try{ await navigator.clipboard.writeText(text); }
+  catch(e){
+    const ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta);
+    ta.select(); try{document.execCommand('copy');}catch(_){} ta.remove();
+  }
+  const old=btn.textContent; btn.textContent='Copied ✓';
+  setTimeout(()=>btn.textContent=old,1400);
+}
+
+function cardHTML(p){
+  const colColor=(COLUMNS.find(c=>c[0]===p.status)||['','', 'var(--muted)'])[2];
+  const poster = p.posted_by && p.posted_by!==p.author
+    ? `<div>Posted by: ${esc(p.posted_by_username||p.posted_by)}</div>` : '';
+  const summary=(p.summary||[]).map(s=>`<li>${esc(s)}</li>`).join('');
+  const chips=(p.line_items||[]).map(l=>`<span class="chip">${esc(l)}</span>`).join('');
+  const polls=(p.easypoll_blocks||[]).map((b,i)=>`
+    <div class="poll"><pre>${esc(b)}</pre>
+    <button type="button" class="copy" data-i="${i}">Copy poll block</button></div>`).join('');
+  const links=[
+    p.discord_post_url?`<a href="${esc(p.discord_post_url)}" target="_blank" rel="noopener">Discord post</a>`:'',
+    p.doc_url?`<a href="${esc(p.doc_url)}" target="_blank" rel="noopener">Proposal doc</a>`:''
+  ].filter(Boolean).join('');
+  const dates=[
+    p.presented_at_senate?`Presented: ${fmtDate(p.presented_at_senate)}`:'',
+    p.voted_at_senate?`Voted: ${fmtDate(p.voted_at_senate)}`:'',
+    p.vote_result&&p.vote_result!=='unknown'?`Result: ${esc(p.vote_result)}`:''
+  ].filter(Boolean).join(' · ');
+  return `<article class="card">
+    <span class="pill" style="background:${colColor}">${esc(p.status||'new')}</span>
+    <h3>${esc(p.name||p.id)}</h3>
+    <div class="meta"><div>Author: ${esc(p.author||'—')}</div>${poster}</div>
+    ${summary?`<ul class="summary">${summary}</ul>`:''}
+    ${chips?`<div class="chips">${chips}</div>`:''}
+    ${links?`<div class="links">${links}</div>`:''}
+    ${polls?`<details><summary>EasyPoll blocks (${p.easypoll_blocks.length}) — copy into Discord</summary>${polls}</details>`:''}
+    ${p.notes?`<div class="notes">${esc(p.notes)}</div>`:''}
+    ${dates?`<div class="foot">${dates}</div>`:''}
+  </article>`;
+}
+
+async function load(){
+  const board=document.getElementById('board');
+  board.innerHTML='<div class="status-msg">Loading proposals from the tracker repo…</div>';
+  try{
+    const tree=await (await fetch(TREE_URL)).json();
+    if(!tree.tree) throw new Error('tree unavailable');
+    const files=tree.tree
+      .filter(n=>n.type==='blob' && n.path.startsWith('proposals/') && n.path.endsWith('.json') && n.path!==TEST_FILE)
+      .map(n=>n.path).sort();
+    const proposals=(await Promise.all(files.map(async f=>{
+      try{ const r=await fetch(rawUrl(f)); if(!r.ok) return null; return await r.json(); }
+      catch(e){ return null; }
+    }))).filter(Boolean);
+
+    const buckets={}; COLUMNS.forEach(c=>buckets[c[0]]=[]);
+    const extra=[];
+    proposals.forEach(p=>{
+      const s=(p.status||'new').toLowerCase();
+      if(buckets[s]) buckets[s].push(p);
+      else { let b=extra.find(e=>e.key===s); if(!b){b={key:s,list:[]};extra.push(b);} b.list.push(p); }
+    });
+    const cols=[...COLUMNS.map(c=>({key:c[0],label:c[1],color:c[2],list:buckets[c[0]]})),
+                ...extra.map(e=>({key:e.key,label:e.key,color:'var(--muted)',list:e.list}))];
+
+    board.innerHTML=cols.map(c=>`
+      <section class="col"><div class="col-head">
+        <span class="col-title" style="color:${c.color}">${esc(c.label)}</span>
+        <span class="count">${c.list.length}</span></div>
+        <div class="cards" data-col="${esc(c.key)}">
+          ${c.list.map(cardHTML).join('')||'<div class="status-msg" style="padding:16px">—</div>'}
+        </div></section>`).join('');
+
+    board.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const card=btn.closest('.card'); const idx=+btn.dataset.i;
+        const name=card.querySelector('h3').textContent;
+        const p=current.find(x=>(x.name||x.id)===name);
+        if(p&&p.easypoll_blocks[idx]) copyText(btn,p.easypoll_blocks[idx]);
+      });
+    });
+    current=proposals;
+    const now=new Date();
+    document.getElementById('updated').textContent='Updated '+now.toLocaleTimeString();
+    document.getElementById('counts').textContent=proposals.length+' proposals · '+files.length+' files';
+  }catch(err){
+    board.innerHTML=`<div class="status-msg error">Couldn’t reach the tracker repo (${esc(err.message)}).<br>
+      <button type="button" id="retry" style="margin-top:12px">Try again</button></div>`;
+    document.getElementById('retry').addEventListener('click',load);
+  }
+}
+let current=[];
+document.getElementById('refresh').addEventListener('click',load);
+load();
+</script>
+</body>
+</html>
