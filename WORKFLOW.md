@@ -20,6 +20,13 @@ Discord since the last Senate session, summarized and ready to poll.
    confirm it happened and covered proposals — skip special sessions with
    no props (e.g. the 2026-09-13 awards-voting special) — and update
    `last_senate` in `state.json`.
+   **Status transitions.** Whenever #agenda-presenting is read (step 1, or
+   any manual check), cross-reference existing proposals: any proposal with
+   status `new` that appears as presented at a Senate moves to `presented`
+   — set `presented_at_senate` to that Senate's date and append a
+   `status_change` event to `history.json` (actor: `workflow`). This is the
+   only automated forward transition besides creation; votes and outcomes
+   still require explicit confirmation.
 2. **Scan window.** Start at `scan_since_override` in `state.json` when
    Zachary has set one (one-shot: clear it after the run consumes it);
    otherwise start at `last_review` (the previous scheduled run). On the
