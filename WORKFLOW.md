@@ -27,7 +27,12 @@ Discord since the last Senate session, summarized and ready to poll.
    `status_change` event to `history.json` (actor: `workflow`). Match Google
    Doc links by document ID (the `/d/<id>/` portion — suffixes like `/edit`
    or `?usp=sharing` vary). If a doc link in #agenda-presenting matches no
-   tracked proposal, it went straight to the agenda: process it as a new
+   tracked proposal, open it (read-only) and scan for outbound Google Doc
+   links — the Senate may post one agenda doc that hyperlinks to the
+   individual proposal docs. Any outbound link matching a tracked
+   proposal's doc ID counts as that proposal being presented. Only if
+   neither the doc itself nor anything it links to matches does it count
+   as a proposal that went straight to the agenda: process it as a new
    proposal (create the JSON as `new`), then immediately apply the
    `new` → `presented` transition with a `status_change` event so the audit
    trail stays complete. Never touch a `canceled` proposal. This is the
