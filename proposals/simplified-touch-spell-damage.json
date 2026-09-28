@@ -1,0 +1,25 @@
+{
+  "author": "Zach/Aches",
+  "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1527014997543358624",
+  "doc_url": "https://docs.google.com/document/d/1W_xL9a2Wh2glXKlIPUJh-fhNFhBr5B-TEgrjQ6Gq3fo/edit?usp=drivesdk",
+  "easypoll_blocks": [
+    "question: Simplified Touch Spell Damage by Zach/Aches — send to Senate vote?\ntext:\nAuthor: Zach/Aches\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1527014997543358624\nDoc: https://docs.google.com/document/d/1W_xL9a2Wh2glXKlIPUJh-fhNFhBr5B-TEgrjQ6Gq3fo/edit?usp=drivesdk\nSummary:\n- Modernizes touch-spell damage calls for Burning Hands, Necrotic Touch, and Shocking Grasp.\n- One charge from a hand deals White damage; two charges from one hand deal Black.\n- Total available damage stays at four points.\n- Burning Hands keeps shield destruction; Necrotic Touch keeps its healing restriction.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+  ],
+  "id": "simplified-touch-spell-damage",
+  "line_items": [],
+  "name": "Simplified Touch Spell Damage",
+  "notes": "",
+  "posted_at": "2026-07-15T18:12:00Z",
+  "posted_by": "ZiggityCheese",
+  "posted_by_username": "ziggitycheese",
+  "presented_at_senate": "2026-08-08",
+  "status": "presented",
+  "summary": [
+    "Modernizes touch-spell damage calls for Burning Hands, Necrotic Touch, and Shocking Grasp.",
+    "One charge from a hand deals White damage; two charges from one hand deal Black.",
+    "Total available damage stays at four points.",
+    "Burning Hands keeps shield destruction; Necrotic Touch keeps its healing restriction."
+  ],
+  "vote_result": null,
+  "voted_at_senate": null
+}
