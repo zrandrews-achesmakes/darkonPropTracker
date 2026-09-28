@@ -52,6 +52,10 @@ Discord since the last Senate session, summarized and ready to poll.
    `easypoll_blocks` from `poll-format.json` and store them in the JSON.
    Append a `created` event to `history.json`; append a `status_change`
    event every time a proposal's status moves (actor: who made the change).
+   Then push everything to GitHub:
+   `~/workspace/skills/github/bin/gh-sync --repo zrandrews-achesmakes/darkonPropTracker --dir ~/workspace/darkon-proposals`.
+   GitHub is the home for these files (the old Google Drive folder is
+   deprecated); never leave the repo behind the local copies.
 7. **Never resurrect.** If a proposal's JSON has status `canceled`, leave it
    alone: no automated run may move it to another status. It changes only on
    Zachary's explicit manual instruction.
