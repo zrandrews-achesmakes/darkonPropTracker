@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Read-only Discord REST CLI.
+
+Commands:
+  guilds                                  List servers the bot is in
+  channels --guild GUILD_ID               List channels in a server
+  resolve --guild GUILD_ID --name NAME    Find a channel ID by name
+  read --channel CHANNEL_ID               Read messages (newest first by default)
+       [--limit N] [--before ID] [--after ID] [--all] [--chronological]
+
+Portable auth: uses the Muse Secure Vault helper when available, otherwise
+the DISCORD_BOT_TOKEN environment variable. This script never sees, prints,
+or persists the raw token beyond the request it signs.
+"""
+import argparse
+import json
+import os
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+sys.path.insert(0, os.path.normpath(
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")))
+from auth import attach_auth, read_json_response
+
+API = "https://discord.com/api/v10"
+
+
+def api_get(path, params=None):
+    url = API + path
+    if params:
+        url += "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(
+        url, headers={"User-Agent": "DarkonDiscordSkill/1.0"}
+    )
+    attach_auth(req, "discord")
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return read_json_response(resp)
+    except urllib.error.HTTPError as e:
+        try:
+            body = e.read().decode("utf-8", "replace")[:1000]
+        except Exception:
+            body = ""
+        if e.code == 429:
+            sys.stderr.write(
+                "Discord rate-limited this request (429). "
+                "Stopping; do not retry in a loop.\n"
+            )
+        raise SystemExit(f"Discord API error {e.code}: {body}")
+
+
+def slim_message(m):
+    author = m.get("author", {}) or {}
+    return {
+        "id": m.get("id"),
+        "timestamp": m.get("timestamp"),
+        "author": author.get("global_name") or author.get("username"),
+        "author_username": author.get("username"),
+        "content": m.get("content", ""),
+        "attachments": [
+            {"filename": a.get("filename"), "url": a.get("url")}
+            for a in (m.get("attachments") or [])
+        ],
+        "embeds": len(m.get("embeds") or []),
+        "reactions": [
+            {"emoji": (r.get("emoji") or {}).get("name"), "count": r.get("count")}
+            for r in (m.get("reactions") or [])
+        ],
+        "thread_id": (m.get("thread") or {}).get("id"),
+    }
+
+
+def cmd_guilds(_args):
+    guilds = api_get("/users/@me/guilds")
+    print(json.dumps(
+        [{"id": g["id"], "name": g["name"]} for g in guilds], indent=1
+    ))
+
+
+def cmd_channels(args):
+    channels = api_get(f"/guilds/{args.guild}/channels")
+    out = []
+    for c in sorted(channels, key=lambda c: c.get("position", 0)):
+        out.append({
+            "id": c["id"],
+            "name": c.get("name"),
+            "type": c.get("type"),
+            "topic": c.get("topic"),
+            "parent_id": c.get("parent_id"),
+        })
+    print(json.dumps(out, indent=1))
+
+
+def cmd_resolve(args):
+    channels = api_get(f"/guilds/{args.guild}/channels")
+    want = args.name.lower().lstrip("#")
+    matches = [c for c in channels
+               if (c.get("name") or "").lower() == want]
+    if not matches:
+        raise SystemExit(f"No channel named '{args.name}' in guild {args.guild}")
+    c = matches[0]
+    print(json.dumps({"id": c["id"], "name": c.get("name"),
+                      "type": c.get("type"), "topic": c.get("topic")}, indent=1))
+
+
+def fetch_page(channel_id, limit, before=None, after=None):
+    params = {"limit": min(max(limit, 1), 100)}
+    if before:
+        params["before"] = before
+    if after:
+        params["after"] = after
+    return api_get(f"/channels/{channel_id}/messages", params)
+
+
+def cmd_read(args):
+    messages = []
+    if args.all:
+        before = args.before
+        while True:
+            page = fetch_page(args.channel, 100, before=before)
+            if not page:
+                break
+            messages.extend(page)
+            if args.after and any(m["id"] == args.after for m in page):
+                break
+            before = page[-1]["id"]
+            if len(page) < 100:
+                break
+        if args.after:
+            messages = [m for m in messages if int(m["id"]) > int(args.after)]
+    else:
+        messages = fetch_page(args.channel, args.limit,
+                              before=args.before, after=args.after)
+    slim = [slim_message(m) for m in messages]
+    if args.chronological:
+        slim.reverse()
+    print(json.dumps(slim, indent=1, ensure_ascii=False))
+
+
+def main():
+    p = argparse.ArgumentParser(prog="discord")
+    sub = p.add_subparsers(dest="cmd", required=True)
+
+    sub.add_parser("guilds", help="List servers the bot is in")
+
+    pc = sub.add_parser("channels", help="List channels in a server")
+    pc.add_argument("--guild", required=True)
+
+    pr = sub.add_parser("resolve", help="Find a channel ID by name")
+    pr.add_argument("--guild", required=True)
+    pr.add_argument("--name", required=True)
+
+    prd = sub.add_parser("read", help="Read channel messages")
+    prd.add_argument("--channel", required=True)
+    prd.add_argument("--limit", type=int, default=50)
+    prd.add_argument("--before", default=None)
+    prd.add_argument("--after", default=None)
+    prd.add_argument("--all", action="store_true",
+                     help="Page through all messages (use with --after to stop)")
+    prd.add_argument("--chronological", action="store_true",
+                     help="Print oldest first")
+
+    args = p.parse_args()
+    {"guilds": cmd_guilds, "channels": cmd_channels,
+     "resolve": cmd_resolve, "read": cmd_read}[args.cmd](args)
+
+
+if __name__ == "__main__":
+    main()
