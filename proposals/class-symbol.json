@@ -1,0 +1,26 @@
+{
+  "author": "⛧ Inox ⛧",
+  "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1538621016454987847",
+  "doc_url": "https://docs.google.com/document/d/11p1PPma8uBoZFx_gZpqnrmF8FYCGvdABxP9mZ5Zui7w/edit?usp=drivesdk",
+  "easypoll_blocks": [
+    "question: Class Symbol by ⛧ Inox ⛧ — send to Senate vote?\ntext:\nAuthor: ⛧ Inox ⛧\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1538621016454987847\nDoc: https://docs.google.com/document/d/11p1PPma8uBoZFx_gZpqnrmF8FYCGvdABxP9mZ5Zui7w/edit?usp=drivesdk\nSummary:\n- Adds a Chapter 6 rule (before the NPC section): some spells and skills require touching a Class Symbol with a free hand during use.\n- The symbol is the player's choice, fitting their persona: holy symbol, skeleton key, arcane medallion, crystal pendant, rune-carved bone, etc.\n- Must be a real physical token (drawn/embroidered does not count) and needs Spell Marshal approval before use.\n- Removes 'Symbol' from the class charts.\n- Rationale: class symbols are not defined anywhere in the rules today.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+  ],
+  "id": "class-symbol",
+  "line_items": [],
+  "name": "Class Symbol",
+  "notes": "Never appeared on a reviewed Senate agenda.",
+  "posted_at": "2026-08-16T18:50:00Z",
+  "posted_by": "⛧ Inox ⛧",
+  "posted_by_username": "thensiur",
+  "presented_at_senate": null,
+  "status": "new",
+  "summary": [
+    "Adds a Chapter 6 rule (before the NPC section): some spells and skills require touching a Class Symbol with a free hand during use.",
+    "The symbol is the player's choice, fitting their persona: holy symbol, skeleton key, arcane medallion, crystal pendant, rune-carved bone, etc.",
+    "Must be a real physical token (drawn/embroidered does not count) and needs Spell Marshal approval before use.",
+    "Removes 'Symbol' from the class charts.",
+    "Rationale: class symbols are not defined anywhere in the rules today."
+  ],
+  "vote_result": null,
+  "voted_at_senate": null
+}
