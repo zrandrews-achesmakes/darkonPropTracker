@@ -1,0 +1,25 @@
+{
+  "author": "Erik Helson",
+  "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1529505027364880607",
+  "doc_url": "https://docs.google.com/document/d/1zFeAPxkCGukONf6WDtnVJDGgyRWFN15C0CiTgiugL0s/edit?usp=drivesdk",
+  "easypoll_blocks": [
+    "question: Gaseous Form changes / Spectre Form by Erik Helson — send to Senate vote?\ntext:\nAuthor: Erik Helson\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1529505027364880607\nDoc: https://docs.google.com/document/d/1zFeAPxkCGukONf6WDtnVJDGgyRWFN15C0CiTgiugL0s/edit?usp=drivesdk\nSummary:\n- Renames Gaseous Form to Spectre Form; hood letter changes from G to S.\n- Adds melee combat between Spectre Form and Shadow Walk participants.\n- Normal armor and combat rules apply between them, but spells and skills remain barred while in form.\n- Interacting with the physical world still breaks the spell.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+  ],
+  "id": "gaseous-shadow-walk",
+  "line_items": [],
+  "name": "Gaseous Form changes / Spectre Form",
+  "notes": "Author renamed the proposal after August 8 Senate feedback (originally framed as Gaseous Form changes).",
+  "posted_at": "2026-07-22T15:06:00Z",
+  "posted_by": "Erik Helson",
+  "posted_by_username": "that__one__dude",
+  "presented_at_senate": "2026-08-08",
+  "status": "presented",
+  "summary": [
+    "Renames Gaseous Form to Spectre Form; hood letter changes from G to S.",
+    "Adds melee combat between Spectre Form and Shadow Walk participants.",
+    "Normal armor and combat rules apply between them, but spells and skills remain barred while in form.",
+    "Interacting with the physical world still breaks the spell."
+  ],
+  "vote_result": null,
+  "voted_at_senate": null
+}
