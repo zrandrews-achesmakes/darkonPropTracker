@@ -146,6 +146,15 @@
       "to": "new",
       "actor": "workflow",
       "note": "First seen in #proposal-discussions."
+    },
+    {
+      "actor": "zachary",
+      "at": "2026-09-27T23:57:58Z",
+      "from": "new",
+      "note": "Manual change from Darkon Board Editor",
+      "proposal_id": "darkon-bot-test-prop",
+      "to": "canceled",
+      "type": "status_change"
     }
   ]
 }
