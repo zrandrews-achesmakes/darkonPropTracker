@@ -58,6 +58,28 @@
   .status-msg.error{color:#ff9a9a}
   footer{padding:14px 24px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .agenda-panel{
+    margin:0 24px 20px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:16px;
+  }
+  .agenda-panel[hidden]{display:none}
+  .agenda-panel h2{margin:0 0 12px;font-size:18px}
+  .agenda-output{
+    white-space:pre-wrap;
+    word-break:break-word;
+    background:#10131a;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:14px;
+    font-size:13px;
+    line-height:1.5;
+    max-height:500px;
+    overflow-y:auto;
+  }
+  .agenda-actions{display:flex;gap:10px;margin-top:12px}
 </style>
 </head>
 <body>
@@ -68,10 +90,19 @@
   </div>
   <div class="controls">
     <span class="sub" id="updated"></span>
+    <button id="agenda-builder" type="button" disabled>Agenda Builder</button>
     <button id="refresh" type="button">↻ Refresh</button>
   </div>
 </header>
 <main id="board"><div class="status-msg" id="loading">Loading proposals from the tracker repo…</div></main>
+<section id="agenda-panel" class="agenda-panel" hidden>
+  <h2>Senate Agenda</h2>
+  <pre id="agenda-output" class="agenda-output"></pre>
+  <div class="agenda-actions">
+    <button id="copy-agenda" type="button">Copy Agenda</button>
+    <button id="close-agenda" type="button">Close</button>
+  </div>
+</section>
 <footer>
   <span>Data: <a href="https://github.com/zrandrews-achesmakes/darkonPropTracker" target="_blank" rel="noopener">zrandrews-achesmakes/darkonPropTracker</a> (public)</span>
   <span id="counts"></span>
@@ -135,6 +166,8 @@ function cardHTML(p){
 }
 
 async function load(){
+  document.getElementById('agenda-builder').disabled=true;
+  document.getElementById('agenda-panel').hidden=true;
   const board=document.getElementById('board');
   board.innerHTML='<div class="status-msg">Loading proposals from the tracker repo…</div>';
   try{
@@ -190,6 +223,7 @@ async function load(){
       });
     });
     current=proposals;
+    document.getElementById('agenda-builder').disabled=false;
     const now=new Date();
     document.getElementById('updated').textContent='Updated '+now.toLocaleTimeString();
     document.getElementById('counts').textContent=proposals.length+' proposals · '+files.length+' files';
@@ -199,8 +233,65 @@ async function load(){
     document.getElementById('retry').addEventListener('click',load);
   }
 }
+function buildAgenda(){
+  const input=prompt('Senate date (YYYY-MM-DD):');
+  if(input===null) return;
+
+  const dateText=input.trim();
+  const date=new Date(`${dateText}T12:00:00Z`);
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(dateText) ||
+     Number.isNaN(date.getTime()) ||
+     date.toISOString().slice(0,10)!==dateText){
+    alert('Enter a valid date in YYYY-MM-DD format.');
+    return;
+  }
+
+  const formattedDate=date.toLocaleDateString('en-US',{
+    year:'numeric',month:'long',day:'numeric',timeZone:'UTC'
+  });
+  const formatProposal=p=>[
+    `### ${p.name||p.id}`,
+    `**Author:** *${p.author||'—'}*`,
+    `**Link to Proposal:** ${p.doc_url||'—'}`
+  ].join('\n');
+  const section=list=>list.length
+    ? list.map(formatProposal).join('\n\n')
+    : '*None*';
+  const votes=current.filter(p=>(p.status||'').toLowerCase()==='presented');
+  const discussion=current.filter(p=>(p.status||'').toLowerCase()==='new');
+
+  const agenda=[
+    `# Senate Date: ${formattedDate}`,
+    '',
+    '---',
+    '',
+    '## Proposals for Vote',
+    '',
+    section(votes),
+    '',
+    '---',
+    '',
+    '## Proposals for Discussion',
+    '',
+    section(discussion),
+    '',
+    '---'
+  ].join('\n');
+
+  document.getElementById('agenda-output').textContent=agenda;
+  const panel=document.getElementById('agenda-panel');
+  panel.hidden=false;
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+}
 let current=[];
 document.getElementById('refresh').addEventListener('click',load);
+document.getElementById('agenda-builder').addEventListener('click',buildAgenda);
+document.getElementById('copy-agenda').addEventListener('click',e=>{
+  copyText(e.currentTarget,document.getElementById('agenda-output').textContent);
+});
+document.getElementById('close-agenda').addEventListener('click',()=>{
+  document.getElementById('agenda-panel').hidden=true;
+});
 load();
 </script>
 </body>
