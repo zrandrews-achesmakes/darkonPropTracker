@@ -24,7 +24,13 @@ Discord since the last Senate session, summarized and ready to poll.
    any manual check), cross-reference existing proposals: any proposal with
    status `new` that appears as presented at a Senate moves to `presented`
    — set `presented_at_senate` to that Senate's date and append a
-   `status_change` event to `history.json` (actor: `workflow`). This is the
+   `status_change` event to `history.json` (actor: `workflow`). Match Google
+   Doc links by document ID (the `/d/<id>/` portion — suffixes like `/edit`
+   or `?usp=sharing` vary). If a doc link in #agenda-presenting matches no
+   tracked proposal, it went straight to the agenda: process it as a new
+   proposal (create the JSON as `new`), then immediately apply the
+   `new` → `presented` transition with a `status_change` event so the audit
+   trail stays complete. Never touch a `canceled` proposal. This is the
    only automated forward transition besides creation; votes and outcomes
    still require explicit confirmation.
 2. **Scan window.** Start at `scan_since_override` in `state.json` when
