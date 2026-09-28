@@ -177,6 +177,15 @@
       "actor": "zachary",
       "at": "2026-09-28T01:05:12Z",
       "note": "Treated as a votable test case at Zachary’s request: two line items identified from the doc, one poll block generated per line item."
+    },
+    {
+      "type": "status_change",
+      "proposal_id": "darkon-bot-test-prop",
+      "from": "new",
+      "to": "withdrawn",
+      "actor": "zachary",
+      "at": "2026-09-28T02:44:01Z",
+      "note": "Zachary asked Navi to mark the test record withdrawn."
     }
   ]
 }
