@@ -13,7 +13,7 @@
   ],
   "fields": {
     "question": "<Proposal name> by <Author>",
-    "text": "Author, Discord post link, Google Doc link, then the bullet summary (up to 5 bullets). This text appears above the poll.",
+    "text": "Author, Discord post link, Google Doc link wrapped in < > (suppresses the Discord link preview), then the bullet summary (up to 5 bullets). This text appears above the poll.",
     "answer-1": "Yes",
     "answer-2": "No",
     "answer-3": "Abstain"
