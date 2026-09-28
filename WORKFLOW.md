@@ -19,14 +19,16 @@ Discord since the last Senate session, summarized and ready to poll.
    (`discord read --channel 1144757403145998467 --all --chronological`) to
    confirm it happened and covered proposals — skip special sessions with
    no props (e.g. the 2026-09-13 awards-voting special) — and update
-   `last_senate` and `scan_since` in `state.json`.
-2. **New proposals.** Read #proposal-discussions messages with timestamp >=
-   `scan_since` from `state.json` (7 days before `last_senate`; e.g.
-   2026-08-01 for the 2026-08-08 Senate). The one-week overlap is
-   intentional — `reported.json` dedupes anything already seen. A new
-   proposal is a message containing a `docs.google.com/document/d/` link —
-   check message content, embeds, and attachments. Skip any message ID
-   already listed in `reported.json`.
+   `last_senate` in `state.json`.
+2. **Scan window.** Start at `scan_since_override` in `state.json` when
+   Zachary has set one (one-shot: clear it after the run consumes it);
+   otherwise start at `last_review` (the previous scheduled run). On the
+   very first run (`last_review` null), start at 2026-08-01. Read
+   #proposal-discussions messages with timestamp >= window start.
+   `reported.json` dedupes anything already seen. A new proposal is a
+   message containing a `docs.google.com/document/d/` link — check message
+   content, embeds, and attachments. Skip any message ID already listed in
+   `reported.json`.
 3. **Read each doc.** `browser.open` cannot render Google Docs, so spawn a
    browser task (read-only) per document and ask it to return: the proposal's
    name, exactly what it changes (old vs new wording where given), the
@@ -63,8 +65,10 @@ Discord since the last Senate session, summarized and ready to poll.
    `easypoll_blocks` from `poll-format.json` and store them in the JSON.
    Append a `created` event to `history.json`; append a `status_change`
    event every time a proposal's status moves (actor: who made the change).
-   Update `state.json`: set `last_review` to the run timestamp (ISO 8601)
-   and `last_review_result` to e.g. `2 new proposals` or `none`.
+   Update `state.json`: set `last_review` to the run timestamp (ISO 8601
+   with timezone offset) and `last_review_result` to e.g.
+   `2 new proposals` or `none`; clear `scan_since_override` if one was
+   consumed.
    Then push everything to GitHub:
    `~/workspace/skills/github/bin/gh-sync --repo zrandrews-achesmakes/darkonPropTracker --dir ~/workspace/darkon-proposals`.
    GitHub is the home for these files (the old Google Drive folder is
@@ -82,8 +86,8 @@ Discord since the last Senate session, summarized and ready to poll.
   ask the user instead of solving.
 
 ## State
-- `state.json` — `last_senate` (date + schedule source), `scan_since` (7
-  days before `last_senate`), `last_review` timestamp and result.
+- `state.json` — `last_senate` (date + schedule source), `last_review`
+  timestamp and result, optional one-shot `scan_since_override`.
 - `reported.json` — message IDs already surfaced (do not re-report).
 - `poll-format.json` — the EasyPoll `/poll` format: fields, vote options, line-item rule.
 - `history.json` — audit trail of proposal events (`created`, `baseline`, `status_change`, `field_update`).
