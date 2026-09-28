@@ -32,11 +32,13 @@ Discord since the last Senate session, summarized and ready to poll.
    votable line items, call them out explicitly after the bullets so it's
    clear the proposal may need one poll per line item rather than a single
    poll.
-5. **Poll block.** Format each proposal per https://easypoll.com/commands as a
-   copy-paste block for Discord's `/poll` command. If the proposal has
-   distinct line items, produce one poll block per line item (question names
-   the line item); otherwise a single poll block for the whole proposal:
-   - `question`: "<Proposal name> by <Author> — send to Senate vote?"
+5. **Poll block.** Format each proposal per `poll-format.json` as a
+   copy-paste block for Discord's `/poll` command. Each block starts with
+   `/poll ` (trailing space) followed by the question on the same line.
+   If the proposal has distinct line items, produce one poll block per
+   line item (question names the line item); otherwise a single poll block
+   for the whole proposal:
+   - `question`: "<Proposal name> by <Author>"
    - `text`: author, post link, doc link, then the bullet summary (this text
      appears above the poll).
    - `answer-1`: "Yes"
