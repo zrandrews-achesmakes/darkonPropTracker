@@ -7,7 +7,7 @@
     "/poll question: Darkon Bot Test Prop: Did you drink enough water? by ZiggityCheese\ntext:\nAuthor: ZiggityCheese\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1553806448226734080\nDoc: https://docs.google.com/document/d/1H6B4d6VnygHlg2qe6rhvOqgUWL-ZQUqa95kJFrUQbZw/edit?usp=drivesdk\nSummary:\n- Test proposal posted by ZiggityCheese for his proposal-tracking automation; explicitly not a real rule change.\n- Line item 1: Is there a Goose here?\n- Line item 2: Did you drink enough water?\n- Handled as a votable test case at Zachary's request — one poll block per line item.\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
   ],
   "id": "darkon-bot-test-prop",
-  "hidden": true,
+  "hidden": false,
   "line_items": [
     "Is there a Goose here?",
     "Did you drink enough water?"
