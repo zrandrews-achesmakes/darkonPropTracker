@@ -22,7 +22,7 @@ Tracks rule proposals from the Darkon Crownlands Community Discord
 ## Data consumers
 
 The public Darkon Proposals board reads this repo live (no auth needed —
-it's public). Raw file URLs look like:
+it's public). Raw file URLs look like :
 
 ```
 https://raw.githubusercontent.com/zrandrews-achesmakes/darkonPropTracker/main/proposals/<id>.json
