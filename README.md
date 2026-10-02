@@ -1,5 +1,7 @@
 # Darkon Proposal Tracker
 
+https://zrandrews-achesmakes.github.io/darkonPropTracker/
+
 Tracks rule proposals from the Darkon Crownlands Community Discord
 (`#proposal-discussions`), summarized and ready to turn into EasyPoll
 `/poll` blocks for Senate votes.
