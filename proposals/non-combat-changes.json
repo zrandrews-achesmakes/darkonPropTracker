@@ -13,13 +13,13 @@
   "posted_by": "cairo",
   "posted_by_username": "cairo0013",
   "presented_at_senate": "2026-08-08",
-  "status": "presented",
+  "status": "passed",
   "summary": [
     "Limits Artisan purchases to non-combat skills, abilities, and spells from other classes at normal cost +5.",
     "Bars combat options, armor, shields, and weapons.",
     "Keeps six total levels, three per outside class, and current-rank restrictions.",
     "Includes a proposed class-by-class combat/non-combat classification."
   ],
-  "vote_result": null,
-  "voted_at_senate": null
+  "vote_result": "passed",
+  "voted_at_senate": "2026-10-03"
 }
