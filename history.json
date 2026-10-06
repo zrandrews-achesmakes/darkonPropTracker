@@ -1,227 +1,272 @@
 {
- "version": 1,
- "event_types": {
-  "created": "Proposal first seen; enters status 'new'.",
-  "baseline": "One-time audit baseline (2026-09-27); earlier transitions were not recorded.",
-  "status_change": "Status moved from one lifecycle value to another.",
-  "field_update": "Non-status field changed (summary, links, etc.)."
- },
- "actors": [
-  "workflow",
-  "navi",
-  "zachary"
- ],
- "events": [
-  {
-   "at": "2026-05-19T22:56:00Z",
-   "proposal_id": "shoe-color",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
+  "version": 1,
+  "event_types": {
+    "created": "Proposal first seen; enters status 'new'.",
+    "baseline": "One-time audit baseline (2026-09-27); earlier transitions were not recorded.",
+    "status_change": "Status moved from one lifecycle value to another.",
+    "field_update": "Non-status field changed (summary, links, etc.)."
   },
-  {
-   "at": "2026-07-15T18:12:00Z",
-   "proposal_id": "simplified-touch-spell-damage",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-07-17T23:15:00Z",
-   "proposal_id": "pouch",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-07-18T00:09:00Z",
-   "proposal_id": "spell-footnotes",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-07-22T15:06:00Z",
-   "proposal_id": "gaseous-shadow-walk",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-07-27T02:04:00Z",
-   "proposal_id": "shillelagh-shield-break",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-07-28T22:08:00Z",
-   "proposal_id": "non-combat-changes",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "shoe-color",
-   "type": "baseline",
-   "from": "new",
-   "to": "voted",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Voted at 2026-08-08 Senate; outcome unknown. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "simplified-touch-spell-damage",
-   "type": "baseline",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "pouch",
-   "type": "baseline",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "spell-footnotes",
-   "type": "baseline",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "gaseous-shadow-walk",
-   "type": "baseline",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-08T00:00:00Z",
-   "proposal_id": "non-combat-changes",
-   "type": "baseline",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
-  },
-  {
-   "at": "2026-08-16T18:50:00Z",
-   "proposal_id": "class-symbol",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "at": "2026-09-27T16:32:05Z",
-   "proposal_id": "darkon-bot-test-prop",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "workflow",
-   "note": "First seen in #proposal-discussions."
-  },
-  {
-   "actor": "zachary",
-   "at": "2026-09-27T23:57:58Z",
-   "from": "new",
-   "note": "Manual change from Darkon Board Editor",
-   "proposal_id": "darkon-bot-test-prop",
-   "to": "canceled",
-   "type": "status_change"
-  },
-  {
-   "type": "status_change",
-   "proposal_id": "darkon-bot-test-prop",
-   "from": "canceled",
-   "to": "new",
-   "actor": "zachary",
-   "at": "2026-09-28T01:02:48Z",
-   "note": "Zachary asked Navi to move it back to new and generate the poll block."
-  },
-  {
-   "type": "field_update",
-   "proposal_id": "darkon-bot-test-prop",
-   "fields": [
-    "line_items",
-    "summary",
-    "easypoll_blocks",
-    "notes"
-   ],
-   "actor": "zachary",
-   "at": "2026-09-28T01:05:12Z",
-   "note": "Treated as a votable test case at Zachary\u2019s request: two line items identified from the doc, one poll block generated per line item."
-  },
-  {
-   "type": "status_change",
-   "proposal_id": "darkon-bot-test-prop",
-   "from": "new",
-   "to": "withdrawn",
-   "actor": "zachary",
-   "at": "2026-09-28T02:44:01Z",
-   "note": "Zachary asked Navi to mark the test record withdrawn."
-  },
-  {
-   "type": "status_change",
-   "proposal_id": "shoe-color",
-   "from": "voted",
-   "to": "passed",
-   "actor": "zachary",
-   "at": "2026-09-28T02:51:51Z",
-   "note": "Zachary asked Navi to mark it passed."
-  },
-  {
-   "at": "2026-09-28T11:53:48Z",
-   "proposal_id": "shillelagh-shield-break",
-   "type": "status_change",
-   "from": "new",
-   "to": "withdrawn",
-   "actor": "zachary",
-   "note": "Withdrawn per Zachary, 2026-09-28."
-  },
-  {
-   "at": "2026-10-03T15:45:43Z",
-   "proposal_id": "bod-bylaws-reconsideration",
-   "type": "created",
-   "from": null,
-   "to": "new",
-   "actor": "navi",
-   "note": "Added from the 2026-10-03 Senate agenda (#agenda-presenting); never posted in #proposal-discussions."
-  },
-  {
-   "at": "2026-10-03T15:45:43Z",
-   "proposal_id": "bod-bylaws-reconsideration",
-   "type": "status_change",
-   "from": "new",
-   "to": "presented",
-   "actor": "navi",
-   "note": "Straight-to-agenda per workflow: appeared under Discussion on the 2026-10-03 Senate agenda as 'BOD by laws - (Ulftadhg)'."
-  }
- ]
+  "actors": [
+    "workflow",
+    "navi",
+    "zachary"
+  ],
+  "events": [
+    {
+      "at": "2026-05-19T22:56:00Z",
+      "proposal_id": "shoe-color",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-15T18:12:00Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-17T23:15:00Z",
+      "proposal_id": "pouch",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-18T00:09:00Z",
+      "proposal_id": "spell-footnotes",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-22T15:06:00Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-27T02:04:00Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-07-28T22:08:00Z",
+      "proposal_id": "non-combat-changes",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "shoe-color",
+      "type": "baseline",
+      "from": "new",
+      "to": "voted",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Voted at 2026-08-08 Senate; outcome unknown. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "baseline",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "pouch",
+      "type": "baseline",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "spell-footnotes",
+      "type": "baseline",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "baseline",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-08T00:00:00Z",
+      "proposal_id": "non-combat-changes",
+      "type": "baseline",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Audit baseline established 2026-09-27. Presented at 2026-08-08 Senate per record. Earlier transitions not recorded."
+    },
+    {
+      "at": "2026-08-16T18:50:00Z",
+      "proposal_id": "class-symbol",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "at": "2026-09-27T16:32:05Z",
+      "proposal_id": "darkon-bot-test-prop",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "workflow",
+      "note": "First seen in #proposal-discussions."
+    },
+    {
+      "actor": "zachary",
+      "at": "2026-09-27T23:57:58Z",
+      "from": "new",
+      "note": "Manual change from Darkon Board Editor",
+      "proposal_id": "darkon-bot-test-prop",
+      "to": "canceled",
+      "type": "status_change"
+    },
+    {
+      "type": "status_change",
+      "proposal_id": "darkon-bot-test-prop",
+      "from": "canceled",
+      "to": "new",
+      "actor": "zachary",
+      "at": "2026-09-28T01:02:48Z",
+      "note": "Zachary asked Navi to move it back to new and generate the poll block."
+    },
+    {
+      "type": "field_update",
+      "proposal_id": "darkon-bot-test-prop",
+      "fields": [
+        "line_items",
+        "summary",
+        "easypoll_blocks",
+        "notes"
+      ],
+      "actor": "zachary",
+      "at": "2026-09-28T01:05:12Z",
+      "note": "Treated as a votable test case at Zachary’s request: two line items identified from the doc, one poll block generated per line item."
+    },
+    {
+      "type": "status_change",
+      "proposal_id": "darkon-bot-test-prop",
+      "from": "new",
+      "to": "withdrawn",
+      "actor": "zachary",
+      "at": "2026-09-28T02:44:01Z",
+      "note": "Zachary asked Navi to mark the test record withdrawn."
+    },
+    {
+      "type": "status_change",
+      "proposal_id": "shoe-color",
+      "from": "voted",
+      "to": "passed",
+      "actor": "zachary",
+      "at": "2026-09-28T02:51:51Z",
+      "note": "Zachary asked Navi to mark it passed."
+    },
+    {
+      "at": "2026-09-28T11:53:48Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "status_change",
+      "from": "new",
+      "to": "withdrawn",
+      "actor": "zachary",
+      "note": "Withdrawn per Zachary, 2026-09-28."
+    },
+    {
+      "at": "2026-10-03T15:45:43Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "created",
+      "from": null,
+      "to": "new",
+      "actor": "navi",
+      "note": "Added from the 2026-10-03 Senate agenda (#agenda-presenting); never posted in #proposal-discussions."
+    },
+    {
+      "at": "2026-10-03T15:45:43Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "status_change",
+      "from": "new",
+      "to": "presented",
+      "actor": "navi",
+      "note": "Straight-to-agenda per workflow: appeared under Discussion on the 2026-10-03 Senate agenda as 'BOD by laws - (Ulftadhg)'."
+    },
+    {
+      "at": "2026-10-06T16:42:03Z",
+      "proposal_id": "non-combat-changes",
+      "type": "status_change",
+      "from": "presented",
+      "to": "passed",
+      "actor": "zachary",
+      "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    },
+    {
+      "at": "2026-10-06T16:42:03Z",
+      "proposal_id": "spell-footnotes",
+      "type": "status_change",
+      "from": "presented",
+      "to": "passed",
+      "actor": "zachary",
+      "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    },
+    {
+      "at": "2026-10-06T16:42:03Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "status_change",
+      "from": "presented",
+      "to": "passed",
+      "actor": "zachary",
+      "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    },
+    {
+      "at": "2026-10-06T16:42:03Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "status_change",
+      "from": "presented",
+      "to": "passed",
+      "actor": "zachary",
+      "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    },
+    {
+      "at": "2026-10-06T16:42:03Z",
+      "proposal_id": "pouch",
+      "type": "status_change",
+      "from": "presented",
+      "to": "passed",
+      "actor": "zachary",
+      "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    }
+  ]
 }
