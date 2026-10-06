@@ -13,13 +13,13 @@
   "posted_by": "chuckkey",
   "posted_by_username": "chuckkey",
   "presented_at_senate": "2026-08-08",
-  "status": "presented",
+  "status": "passed",
   "summary": [
     "Allows casting Pouch while already holding a spell.",
     "If Pouch is interrupted, the held spell activates on the caster.",
     "Standardizes 'stored/held' terminology to 'pouched'.",
     "Still one pouched spell at a time, and only the caster can invoke it."
   ],
-  "vote_result": null,
-  "voted_at_senate": null
+  "vote_result": "passed",
+  "voted_at_senate": "2026-10-03"
 }
