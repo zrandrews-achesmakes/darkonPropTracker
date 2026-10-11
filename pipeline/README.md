@@ -14,7 +14,10 @@ Muse account — lives in this repo. No step requires the original machine.
 3. One JSON record per proposal is written to `proposals/<id>.json`
    (see `proposals/SCHEMA.md`), EasyPoll `/poll` blocks are generated from
    `poll-format.json`, and audit events go to `history.json`.
-4. Everything is pushed back to this repo, which doubles as the data source
+4. Each record keeps workflow `status` separate from outcome `tags`; approved
+   playtest records use `approved_by_bod` plus the `Playtest` tag. The full
+   status/tag contract is in `proposals/SCHEMA.md`.
+5. Everything is pushed back to this repo, which doubles as the data source
    for the public proposals board.
 
 The full step-by-step is in `../WORKFLOW.md`.
@@ -78,6 +81,8 @@ that can fetch the doc text read-only).
 - These are portable snapshots taken 2026-09-27. If the workflow evolves,
   re-export them from the author's workspace.
 - A Discord `429` is a hard stop — never retry in a loop.
-- Automation never moves a `canceled` proposal to another status.
+- `Scheduled` is not a status. A withdrawn proposal is `done` with the
+  `Withdrawn` tag. Automation never moves a `canceled` proposal to another
+  status.
 - `proposals/darkon-bot-test-prop.json` is a marked test record; real tooling
   should exclude it from public displays.
