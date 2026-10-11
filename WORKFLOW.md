@@ -40,7 +40,7 @@ cross-reference every proposal against it:
 | Anything matching a `canceled` proposal | Leave it alone. Never resurrect. |
 
 This `new` → `presented` move is the only automated forward transition
-besides creation. Votes and outcomes still require explicit confirmation.
+besides creation. A confirmed Senate vote moves the proposal to `voted`; record the outcome in `vote_result` and add `Passed` or `Failed` to `tags`. `Scheduled` is not a status, so retain upcoming-agenda context in notes until the vote occurs. A playtest approval uses status `approved_by_bod` with the `Playtest` tag. BOD approval and Discord recording remain separate stages.
 ## Step 2 — Find new proposals in #proposal-discussions
 
 ### 2a. Determine the scan window
@@ -134,7 +134,8 @@ deprecated); never leave the repo behind the local copies.
 
 If a proposal's JSON has status `canceled`, leave it alone: no automated
 run may move it to another status. It changes only on Zachary's explicit
-manual instruction.
+manual instruction. A withdrawn proposal uses status `done` plus the
+`Withdrawn` tag; it is distinct from a canceled proposal.
 
 ## Step 8 — Report
 
