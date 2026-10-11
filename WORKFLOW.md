@@ -125,7 +125,7 @@ matching field.
   consumed.
 
 ### 6b. Push to GitHub
-`~/workspace/skills/github/bin/gh-sync --repo zrandrews-achesmakes/darkonPropTracker --dir ~/workspace/darkon-proposals`
+`~/workspace/skills/github/bin/gh-sync --repo zrandrews-achesmakes/darkonPropTracker --dir ~/workspace/darkon-proposals --branch test-status-tags`
 
 GitHub is the home for these files (the old Google Drive folder is
 deprecated); never leave the repo behind the local copies.
