@@ -20,7 +20,7 @@ Muse account — lives in this repo. No step requires the original machine.
 5. Everything is pushed back to this repo, which doubles as the data source
    for the public proposals board.
 
-The full step-by-step is in `../WORKFLOW.md`.
+The full step-by-step is in `../WORKFLOW.md`. The proposed GitHub Project\nfield and status mapping is in `../docs/SYNC.md`.
 
 ## What's in `pipeline/skills/`
 
