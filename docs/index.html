@@ -8,9 +8,8 @@
   :root{
     --bg:#14161c; --panel:#1d2029; --card:#242936; --line:#333a4d;
     --text:#e8eaf0; --muted:#9aa3b8; --accent:#d8a93f;
-    --new:#6aa8ff; --presented:#b48cff; --scheduled:#ffcf5c;
-    --voted:#7fe0c3; --passed:#6fd98a; --failed:#ff8a8a;
-    --playtest:#5cd6ff; --withdrawn:#a8adbd; --canceled:#6b7280;
+    --new:#6aa8ff; --presented:#b48cff; --voted:#7fe0c3;
+    --approved:#5cd6ff; --recorded:#6fd98a; --done:#a8adbd; --canceled:#6b7280;
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);
@@ -113,11 +112,12 @@ const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH
 const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
 
 const COLUMNS=[
-  ['new','New','var(--new)'],['presented','Presented','var(--presented)'],
-  ['scheduled','Scheduled','var(--scheduled)'],['voted','Voted','var(--voted)'],
-  ['passed','Passed','var(--passed)'],['failed','Failed','var(--failed)'],
-  ['playtest','Playtest','var(--playtest)'],['withdrawn','Withdrawn','var(--withdrawn)'],
-  ['canceled','Canceled','var(--canceled)']
+  ['new','New Proposals','var(--new)'],
+  ['presented','Discussed in Senate','var(--presented)'],
+  ['voted','Voted in Senate','var(--voted)'],
+  ['approved_by_bod','Approved by BOD','var(--approved)'],
+  ['recorded','Recorded on #passed-and-pending','var(--recorded)'],
+  ['done','Done','var(--done)']
 ];
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
