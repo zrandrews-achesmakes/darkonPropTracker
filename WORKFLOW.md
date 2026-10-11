@@ -39,8 +39,7 @@ cross-reference every proposal against it:
 | Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `new`, then immediately apply `new` → `presented` with a `status_change` event. |
 | Anything matching a `canceled` proposal | Leave it alone. Never resurrect. |
 
-This `new` → `presented` move is the only automated forward transition
-besides creation. A confirmed Senate vote moves the proposal to `voted`; record the outcome in `vote_result` and add `Passed` or `Failed` to `tags`. `Scheduled` is not a status, so retain upcoming-agenda context in notes until the vote occurs. A playtest approval uses status `approved_by_bod` with the `Playtest` tag. BOD approval and Discord recording remain separate stages.
+The `new` → `presented` move is the only automatic stage transition. A confirmed Senate vote moves the proposal to `voted`; record the outcome in `vote_result` and add `Passed` or `Failed` to `tags`. `Scheduled` is not a status, so retain upcoming-agenda context in notes until the vote occurs. A playtest approval uses status `approved_by_bod` with the `Playtest` tag. BOD approval and Discord recording remain separate stages.
 ## Step 2 — Find new proposals in #proposal-discussions
 
 ### 2a. Determine the scan window
@@ -113,8 +112,7 @@ matching field.
   surface genuinely new proposals.
 - Write one JSON tracking form per new proposal to `proposals/<id>.json`,
   following `proposals/SCHEMA.md` (author, poster, timestamps, post +
-  doc links, summary bullets, line items, status, Senate dates, vote
-  result, notes). Generate its `easypoll_blocks` from `poll-format.json`
+  doc links, summary bullets, line items, workflow status, tags, Senate dates, vote result, and notes). Generate its `easypoll_blocks` from `poll-format.json`
   and store them in the JSON.
 - Append a `created` event to `history.json`; append a `status_change`
   event every time a proposal's status moves (actor: who made the
