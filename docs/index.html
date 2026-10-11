@@ -107,7 +107,7 @@
   <span id="counts"></span>
 </footer>
 <script>
-const OWNER='zrandrews-achesmakes', REPO='darkonPropTracker', BRANCH='main';
+const OWNER='zrandrews-achesmakes', REPO='darkonPropTracker', BRANCH='test-status-tags';
 const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
 const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
 
@@ -135,11 +135,12 @@ async function copyText(btn,text){
 }
 
 function cardHTML(p){
-  const colColor=(COLUMNS.find(c=>c[0]===p.status)||['','', 'var(--muted)'])[2];
+  const displayStatus=p.status==='canceled'?'done':(p.status||'new');
+  const colColor=(COLUMNS.find(c=>c[0]===displayStatus)||['','', 'var(--muted)'])[2];
   const poster = p.posted_by && p.posted_by!==p.author
     ? `<div>Posted by: ${esc(p.posted_by_username||p.posted_by)}</div>` : '';
   const summary=(p.summary||[]).map(s=>`<li>${esc(s)}</li>`).join('');
-  const chips=(p.line_items||[]).map(l=>`<span class="chip">${esc(l)}</span>`).join('');
+  const chips=[...(p.tags||[]),...(p.line_items||[])].map(l=>`<span class="chip">${esc(l)}</span>`).join('');
   const polls=(p.easypoll_blocks||[]).map((b,i)=>`
     <div class="poll"><pre>${esc(b)}</pre>
     <button type="button" class="copy" data-i="${i}">Copy poll block</button></div>`).join('');
@@ -153,7 +154,7 @@ function cardHTML(p){
     p.vote_result&&p.vote_result!=='unknown'?`Result: ${esc(p.vote_result)}`:''
   ].filter(Boolean).join(' · ');
   return `<article class="card">
-    <span class="pill" style="background:${colColor}">${esc(p.status||'new')}</span>
+    <span class="pill" style="background:${colColor}">${esc(COLUMNS.find(c=>c[0]===displayStatus)?.[1]||p.status||'new')}</span>
     <h3>${esc(p.name||p.id)}</h3>
     <div class="meta"><div>Author: ${esc(p.author||'—')}</div>${poster}</div>
     ${summary?`<ul class="summary">${summary}</ul>`:''}
@@ -200,11 +201,12 @@ async function load(){
     const extra=[];
     proposals.forEach(p=>{
       const s=(p.status||'new').toLowerCase();
-      if(buckets[s]) buckets[s].push(p);
-      else { let b=extra.find(e=>e.key===s); if(!b){b={key:s,list:[]};extra.push(b);} b.list.push(p); }
+      const key=s==='canceled'?'done':s;
+      if(buckets[key]) buckets[key].push(p);
+      else { let b=extra.find(e=>e.key===key); if(!b){b={key,label:key,list:[]};extra.push(b);} b.list.push(p); }
     });
     const cols=[...COLUMNS.map(c=>({key:c[0],label:c[1],color:c[2],list:buckets[c[0]]})),
-                ...extra.map(e=>({key:e.key,label:e.key,color:'var(--muted)',list:e.list}))];
+                ...extra.map(e=>({key:e.key,label:'Needs review: '+e.key,color:'var(--muted)',list:e.list}))];
 
     board.innerHTML=cols.map(c=>`
       <section class="col"><div class="col-head">
