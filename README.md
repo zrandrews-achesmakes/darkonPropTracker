@@ -16,7 +16,7 @@ Tracks rule proposals from the Darkon Crownlands Community Discord
   Abstain options, line-item rule.
 - `history.json` — audit trail of proposal events.
 - `reported.json` — Discord message IDs already processed (not re-reported).
-- `pipeline/` — rebuild kit: portable copies of the Discord reader and
+- `docs/SYNC.md` — proposed mapping to the existing GitHub Project.\n- `pipeline/` — rebuild kit: portable copies of the Discord reader and
   GitHub sync tools plus a guide to reconstruct the process on another AI
   tool or Muse account. Start at `pipeline/README.md`.
 
