@@ -22,5 +22,6 @@
     "Rationale: class symbols are not defined anywhere in the rules today."
   ],
   "vote_result": null,
-  "voted_at_senate": null
+  "voted_at_senate": null,
+  "tags": []
 }
