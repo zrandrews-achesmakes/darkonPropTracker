@@ -13,7 +13,7 @@
   "posted_by": "ZiggityCheese",
   "posted_by_username": "ziggitycheese",
   "presented_at_senate": "2026-08-08",
-  "status": "passed",
+  "status": "voted",
   "summary": [
     "Modernizes touch-spell damage calls for Burning Hands, Necrotic Touch, and Shocking Grasp.",
     "One charge from a hand deals White damage; two charges from one hand deal Black.",
@@ -21,5 +21,8 @@
     "Burning Hands keeps shield destruction; Necrotic Touch keeps its healing restriction."
   ],
   "vote_result": "passed",
-  "voted_at_senate": "2026-10-03"
+  "voted_at_senate": "2026-10-03",
+  "tags": [
+    "Passed"
+  ]
 }
