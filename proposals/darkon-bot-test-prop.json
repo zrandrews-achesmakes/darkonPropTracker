@@ -17,7 +17,7 @@
   "posted_by": "ZiggityCheese",
   "posted_by_username": "ziggitycheese",
   "presented_at_senate": null,
-  "status": "withdrawn",
+  "status": "done",
   "summary": [
     "Test proposal posted by ZiggityCheese for his proposal-tracking automation; explicitly not a real rule change.",
     "Line item 1: Is there a Goose here?",
@@ -25,5 +25,8 @@
     "Handled as a votable test case at Zachary's request — one poll block per line item."
   ],
   "vote_result": null,
-  "voted_at_senate": null
+  "voted_at_senate": null,
+  "tags": [
+    "Withdrawn"
+  ]
 }
