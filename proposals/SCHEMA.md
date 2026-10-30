@@ -31,16 +31,21 @@ https://github.com/users/zrandrews-achesmakes/projects/2
 `PVTSSF_lAHOE7xLmc4BmfHqzhlH9tQ`), verified live on 2026-10-30.
 Use the option name verbatim as the JSON `status` value.
 
+The first four names also match the statuses the Darkon BOD uses on its
+own board (adopted at Zachary's direction on 2026-10-30: New Proposals →
+To Present, Discussed in Senate → Up for Vote, Voted in Senate → Passed
+Senate/Playtest, Approved by BOD → Passed BOD). Our workflow **ends at
+`Recorded on #passed-and-pending` or `Done`** — the BOD board's later
+stages (`Pending Publication`, `Rulebook Published`) and its
+`Withdraw/Fail` stage are not used here; a proposal that is written into
+the rulebook or withdrawn both close as `Done`, with the detail in
+`vote_result` / `notes`.
+
 | # | Status value | Option ID | Meaning |
 |---|---|---|---|
-| 1 | `New Proposals` | `f75ad846` | Posted, not yet discussed at a Senate. |
-| 2 | `Discussed in Senate` | `61e4505c` | Discussed / presented at a Senate, awaiting a vote. |
-| 3 | `Voted in Senate` | `47fc9ee4` | A Senate vote has happened; see `vote_result` for the outcome. |
-| 4 | `Approved by BOD` | `df73e18b` | Approved by the Board of Directors after the Senate vote. |
-| 5 | `Recorded on #passed-and-pending` | `98c13ac4` | Recorded on the Discord #passed-and-pending channel. |
-| 6 | `Done` | `98236657` | Closed out. Terminal: no automated run may move a `Done` proposal to another status. It changes only on an explicit manual change by Zachary. |
-
-Withdrawn, canceled, failed, and playtest outcomes are **not** statuses
-under this scheme (they were, before the 2026-10-30 migration to the
-Project 2 options). Record them in `vote_result` and/or `notes`, and
-close the proposal as `Done` when it is finished.
+| 1 | `To Present` | `e31064a4` | Posted, not yet presented / discussed at a Senate. |
+| 2 | `Up for Vote` | `ac134f43` | Discussed at a Senate, awaiting a vote. |
+| 3 | `Passed Senate/Playtest` | `a8eef09e` | Passed by the Senate (or approved for playtest), pending BOD approval. See `vote_result` for the outcome. |
+| 4 | `Passed BOD` | `3ca57afe` | Passed in Senate and approved by the BOD. |
+| 5 | `Recorded on #passed-and-pending` | `d8219fdd` | Approved by BOD and posted on the Discord #passed-and-pending channel. End of our workflow for passed proposals. |
+| 6 | `Done` | `1de02fe0` | Closed out (written to the rulebook, or withdrawn). Terminal: no automated run may move a `Done` proposal to another status. It changes only on an explicit manual change by Zachary. |
