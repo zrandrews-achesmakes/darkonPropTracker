@@ -80,6 +80,11 @@
     overflow-y:auto;
   }
   .agenda-actions{display:flex;gap:10px;margin-top:12px}
+  .agenda-date-row{display:flex;gap:10px;align-items:center;margin-bottom:12px;flex-wrap:wrap}
+  .agenda-date-row label{font-size:14px;color:var(--muted)}
+  .agenda-date-row input[type="date"]{background:var(--card);color:var(--text);
+    border:1px solid var(--line);border-radius:8px;padding:7px 10px;font:inherit;font-size:14px;
+    color-scheme:dark}
 </style>
 </head>
 <body>
@@ -97,6 +102,11 @@
 <main id="board"><div class="status-msg" id="loading">Loading proposals from the tracker repo…</div></main>
 <section id="agenda-panel" class="agenda-panel" hidden>
   <h2>Senate Agenda</h2>
+  <div class="agenda-date-row">
+    <label for="agenda-date">Senate date:</label>
+    <input type="date" id="agenda-date">
+    <button id="build-agenda" type="button">Build Agenda</button>
+  </div>
   <pre id="agenda-output" class="agenda-output"></pre>
   <div class="agenda-actions">
     <button id="copy-agenda" type="button">Copy Agenda</button>
@@ -234,16 +244,28 @@ async function load(){
     document.getElementById('retry').addEventListener('click',load);
   }
 }
+function localToday(){
+  const t=new Date();
+  const mm=String(t.getMonth()+1).padStart(2,'0');
+  const dd=String(t.getDate()).padStart(2,'0');
+  return `${t.getFullYear()}-${mm}-${dd}`;
+}
+function openAgendaBuilder(){
+  const input=document.getElementById('agenda-date');
+  input.value=localToday();
+  const panel=document.getElementById('agenda-panel');
+  panel.hidden=false;
+  panel.scrollIntoView({behavior:'smooth',block:'start'});
+  input.focus();
+  try{ input.showPicker(); }catch(e){ /* calendar opens on click where showPicker is unsupported */ }
+}
 function buildAgenda(){
-  const input=prompt('Senate date (YYYY-MM-DD):');
-  if(input===null) return;
-
-  const dateText=input.trim();
+  const dateText=document.getElementById('agenda-date').value.trim();
   const date=new Date(`${dateText}T12:00:00Z`);
   if(!/^\d{4}-\d{2}-\d{2}$/.test(dateText) ||
      Number.isNaN(date.getTime()) ||
      date.toISOString().slice(0,10)!==dateText){
-    alert('Enter a valid date in YYYY-MM-DD format.');
+    alert('Pick a valid date.');
     return;
   }
 
@@ -286,7 +308,8 @@ function buildAgenda(){
 }
 let current=[];
 document.getElementById('refresh').addEventListener('click',load);
-document.getElementById('agenda-builder').addEventListener('click',buildAgenda);
+document.getElementById('agenda-builder').addEventListener('click',openAgendaBuilder);
+document.getElementById('build-agenda').addEventListener('click',buildAgenda);
 document.getElementById('copy-agenda').addEventListener('click',e=>{
   copyText(e.currentTarget,document.getElementById('agenda-output').textContent);
 });
