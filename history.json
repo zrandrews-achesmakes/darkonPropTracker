@@ -495,6 +495,21 @@
       ],
       "actor": "zachary",
       "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; Recorded status per Project 2 means BOD-approved)."
+    },
+    {
+      "at": "2026-10-30T15:25:38Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "field_update",
+      "field": "vote_result",
+      "from": [
+        "passed_senate"
+      ],
+      "to": [
+        "passed_senate",
+        "failed_bod"
+      ],
+      "actor": "zachary",
+      "note": "Zachary confirmed on 2026-10-30 that Gaseous failed BOD review; failed_bod appended, superseding the earlier same-day backfill that had left its BOD path undocumented."
     }
   ]
 }
