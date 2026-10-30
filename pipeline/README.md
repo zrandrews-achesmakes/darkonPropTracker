@@ -31,6 +31,12 @@ The full step-by-step is in `../WORKFLOW.md`.
 | `skills/github/bin/gh-sync` | Pushes a local directory to a GitHub repo via the Contents API (no SSH needed). |
 | `skills/github/SKILL.md` | Usage notes for the sync tool. |
 
+Also in `pipeline/`:
+
+| Path | What it is |
+|---|---|
+| `cron.md` | The scheduled review job's definition (Saturdays 01:00 America/New_York, silent on success) and its verbatim instruction text. |
+
 Both CLIs are pure Python 3 stdlib. The **only** platform-specific seam is
 credential injection, handled by `auth.py`:
 
