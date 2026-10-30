@@ -267,6 +267,105 @@
       "to": "passed",
       "actor": "zachary",
       "note": "Voted at the 2026-10-03 Senate; reported passed by Zachary."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "status_change",
+      "from": "presented",
+      "to": "Discussed in Senate",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: presented -> Discussed in Senate. Project 2 lists this proposal as 'Discussed in Senate'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "class-symbol",
+      "type": "field_update",
+      "from": null,
+      "to": null,
+      "actor": "zachary",
+      "note": "Corrected during the 2026-10-30 status migration: presented_at_senate set to 2026-10-03 and notes updated — Class Symbol was a discussion item at that Senate, it had not simply never appeared."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "class-symbol",
+      "type": "status_change",
+      "from": "new",
+      "to": "Discussed in Senate",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: new -> Discussed in Senate. Project 2 lists this proposal as 'Discussed in Senate'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "darkon-bot-test-prop",
+      "type": "status_change",
+      "from": "withdrawn",
+      "to": "Done",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: withdrawn -> Done (terminal status; test record, not an item on Project 2)."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Done",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Done. Project 2 lists this proposal as 'Done'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "non-combat-changes",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Recorded on #passed-and-pending",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "pouch",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Recorded on #passed-and-pending",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "status_change",
+      "from": "withdrawn",
+      "to": "Done",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: withdrawn -> Done. Project 2 lists this proposal as 'Done'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "shoe-color",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Recorded on #passed-and-pending",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Recorded on #passed-and-pending",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
+    },
+    {
+      "at": "2026-10-30T13:32:10Z",
+      "proposal_id": "spell-footnotes",
+      "type": "status_change",
+      "from": "passed",
+      "to": "Recorded on #passed-and-pending",
+      "actor": "zachary",
+      "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
     }
   ]
 }
