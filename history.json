@@ -366,6 +366,24 @@
       "to": "Recorded on #passed-and-pending",
       "actor": "zachary",
       "note": "Status migrated on 2026-10-30 to match the GitHub Project 2 'Darkon Proposal Tracker' Status options: passed -> Recorded on #passed-and-pending. Project 2 lists this proposal as 'Recorded on #passed-and-pending'."
+    },
+    {
+      "at": "2026-10-30T15:15:33Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "status_change",
+      "from": "Discussed in Senate",
+      "to": "Up for Vote",
+      "actor": "zachary",
+      "note": "Status renamed on 2026-10-30 to align with the BOD board statuses, at Zachary's direction: Discussed in Senate -> Up for Vote. Same stage, new name; Project 2 Status option renamed to match."
+    },
+    {
+      "at": "2026-10-30T15:15:33Z",
+      "proposal_id": "class-symbol",
+      "type": "status_change",
+      "from": "Discussed in Senate",
+      "to": "Up for Vote",
+      "actor": "zachary",
+      "note": "Status renamed on 2026-10-30 to align with the BOD board statuses, at Zachary's direction: Discussed in Senate -> Up for Vote. Same stage, new name; Project 2 Status option renamed to match."
     }
   ]
 }
