@@ -564,6 +564,16 @@
       "type": "created",
       "actor": "workflow",
       "note": "Created from cairo's 2026-10-26 #proposal-discussions post during the ad-hoc review run on 2026-10-30 requested by Zachary. Status: To Present. Six separable line items identified in the document, one EasyPoll block generated per line item."
+    },
+    {
+      "at": "2026-10-30T16:22:57Z",
+      "proposal_id": "monk-rogue-class-tweaks",
+      "type": "field_update",
+      "field": "github_issue_url",
+      "from": null,
+      "to": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/10",
+      "actor": "workflow",
+      "note": "GitHub issue #10 created in darkonPropTracker and added as a card on Project 2 with status To Present (Zachary flagged that the ad-hoc run had created the tracker record without a project card; card creation is now part of the workflow)."
     }
   ]
 }
