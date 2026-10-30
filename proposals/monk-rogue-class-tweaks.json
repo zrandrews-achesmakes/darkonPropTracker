@@ -3,7 +3,7 @@
   "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724",
   "doc_url": "https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing",
   "easypoll_blocks": [
-    "/poll question: Monk/Rogue Class Tweaks by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nSummary:\n- Monks gain Slow Fall at Rank 10: no damage from jumping or falling off fortification walls.\n- Chi Block at Rank 20 can be performed with an open hand as well as with Monk Hands.\n- At Rank 20, Monks learn Freedom of Movement instead of Evasion — Big Game Hunter effects plus immunity to Hold spells and effects.\n- Evasion becomes Rogue-only: duration changes from Permanent to Instant, and resting for 60 seconds regains it.\n- New fortification rule — jumping or falling from a fortification wall causes a light wound to each leg (the damage Slow Fall negates) — and a new Monk relic, Earthquake: a quarterstaff that strikes per Shield Break and deals magical damage (magical yellow only when wielded one-handed).\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+    "/poll question: Monk/Rogue Class Tweaks by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
   ],
   "github_issue_url": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/10",
   "id": "monk-rogue-class-tweaks",
