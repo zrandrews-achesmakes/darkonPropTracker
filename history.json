@@ -537,6 +537,26 @@
       "to": "Withdraw/Fail",
       "actor": "zachary",
       "note": "Status option renamed Done -> Withdraw/Fail on 2026-10-30 at Zachary's direction, matching the BOD board's label. No change in meaning or placement."
+    },
+    {
+      "at": "2026-10-30T15:34:03Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "field_update",
+      "field": "github_issue_url",
+      "from": null,
+      "to": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/1",
+      "actor": "zachary",
+      "note": "Project 2 item for this proposal is a real GitHub issue in zrandrews-achesmakes/darkonPropTracker (items become issues when they move to Up for Vote); URL recorded on 2026-10-30."
+    },
+    {
+      "at": "2026-10-30T15:34:03Z",
+      "proposal_id": "class-symbol",
+      "type": "field_update",
+      "field": "github_issue_url",
+      "from": null,
+      "to": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/2",
+      "actor": "zachary",
+      "note": "Project 2 item for this proposal is a real GitHub issue in zrandrews-achesmakes/darkonPropTracker (items become issues when they move to Up for Vote); URL recorded on 2026-10-30."
     }
   ]
 }
