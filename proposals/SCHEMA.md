@@ -14,6 +14,7 @@ One JSON file per proposal in this directory, named `<id>.json`.
 | `posted_at` | string | ISO-8601 timestamp of the Discord post. |
 | `discord_post_url` | string | Link to the Discord message. |
 | `doc_url` | string | Link to the Google Doc (verbatim as posted). |
+| `github_issue_url` | string \| null | Link to the proposal's GitHub issue in `zrandrews-achesmakes/darkonPropTracker`. Set when the proposal moves to `Up for Vote` — at that point its Project 2 draft item is converted into a real issue. Absent/null while it is still a draft item. |
 | `summary` | string[] | Up to 5 bullet points summarizing the proposal. |
 | `easypoll_blocks` | string[] | Copy-paste EasyPoll `/poll` blocks per `poll-format.json`, one per line item (or a single block for the whole proposal). Empty when no vote applies (e.g. test records). |
 | `line_items` | string[] | Separable items needing their own vote, if any. |
@@ -94,3 +95,9 @@ To Present ──→ Up for Vote ──┬──→ Passed Senate/Playtest ─�
   Vote` (when a proposal appears on #agenda-presenting). Every fork
   move is manual, because vote and BOD outcomes only enter the tracker
   from Zachary's explicit confirmation.
+- **Moving to `Up for Vote` makes it a GitHub issue:** when a proposal
+  enters `Up for Vote`, its item on Project 2 is converted from a
+  draft item into a real issue in the `darkonPropTracker` repo, and
+  the issue link is recorded in the proposal's `github_issue_url`.
+  (As of 2026-10-30 the two `Up for Vote` proposals are issues #1 and
+  #2; every other tracked proposal is still a draft item.)
