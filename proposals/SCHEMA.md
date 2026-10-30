@@ -100,5 +100,5 @@ To Present ──→ Up for Vote ──┬──→ Passed Senate/Playtest ─�
   adds it as a card on Project 2 at `To Present` (see WORKFLOW Step
   6a); the link is recorded in `github_issue_url`. Status moves after
   that change the card's Status only — there is nothing to convert.
-  (As of 2026-10-30 all ten tracked proposals are issues #1–#10 on
-  Project 2.)
+  (As of 2026-10-30 all ten real proposals are issues #1–#10 on
+  Project 2; the marked test record has no issue.)
