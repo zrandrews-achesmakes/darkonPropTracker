@@ -37,7 +37,7 @@ cross-reference every proposal against it:
 | Doc link whose document ID matches a tracked `To Present` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
 | Doc link matching nothing tracked | Open it (read-only) and scan for outbound Google Doc links — the Senate may post one agenda doc linking to the individual proposal docs. Any outbound link matching a tracked proposal counts as presented. |
 | Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `To Present`, then immediately apply `To Present` → `Up for Vote` with a `status_change` event. |
-| Anything matching a `Done` proposal | Leave it alone. Never resurrect. |
+| Anything matching a `Withdraw/Fail` proposal | Leave it alone. Never resurrect. |
 
 This `To Present` → `Up for Vote` move is the only automated forward transition
 besides creation. Votes and outcomes still require explicit confirmation.
@@ -136,17 +136,19 @@ deprecated); never leave the repo behind the local copies.
 ## Step 7 — Respect end-of-scope proposals
 
 Our scope ends at two statuses: `Recorded on #passed-and-pending` and
-`Done`. If a proposal's JSON has either status, leave it alone: no
-automated run may move it to another status. It changes only on
-Zachary's explicit manual instruction. (Before the 2026-10-30
+`Withdraw/Fail`. If a proposal's JSON has either status, leave it
+alone: no automated run may move it to another status. It changes only
+on Zachary's explicit manual instruction. (Before the 2026-10-30
 migration to the Project 2 status options, this rule protected
 `canceled` proposals; withdrawn/canceled outcomes are now recorded in
 `notes` / `vote_result`, and failed or withdrawn proposals close as
-`Done`.)
+`Withdraw/Fail` — the status named `Done` until its 2026-10-30
+rename.)
 
 The full transition map, including the two forks — `Up for Vote` →
-`Passed Senate/Playtest` or `Done`, and `Passed Senate/Playtest` →
-`Passed BOD` or `Done` — lives in `proposals/SCHEMA.md` under
+`Passed Senate/Playtest` or `Withdraw/Fail`, and
+`Passed Senate/Playtest` → `Passed BOD` or `Withdraw/Fail` — lives in
+`proposals/SCHEMA.md` under
 "Transitions". Fork moves are always manual: they happen only on
 Zachary's explicit confirmation of the vote or BOD outcome.
 
