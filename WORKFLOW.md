@@ -133,14 +133,22 @@ matching field.
 GitHub is the home for these files (the old Google Drive folder is
 deprecated); never leave the repo behind the local copies.
 
-## Step 7 — Respect Done proposals
+## Step 7 — Respect end-of-scope proposals
 
-If a proposal's JSON has status `Done`, leave it alone: no automated
-run may move it to another status. It changes only on Zachary's explicit
-manual instruction. (Before the 2026-10-30 migration to the Project 2
-status options, this rule protected `canceled` proposals; `Done` is now
-the terminal status, and withdrawn/canceled outcomes are recorded in
-`notes` / `vote_result`.)
+Our scope ends at two statuses: `Recorded on #passed-and-pending` and
+`Done`. If a proposal's JSON has either status, leave it alone: no
+automated run may move it to another status. It changes only on
+Zachary's explicit manual instruction. (Before the 2026-10-30
+migration to the Project 2 status options, this rule protected
+`canceled` proposals; withdrawn/canceled outcomes are now recorded in
+`notes` / `vote_result`, and failed or withdrawn proposals close as
+`Done`.)
+
+The full transition map, including the two forks — `Up for Vote` →
+`Passed Senate/Playtest` or `Done`, and `Passed Senate/Playtest` →
+`Passed BOD` or `Done` — lives in `proposals/SCHEMA.md` under
+"Transitions". Fork moves are always manual: they happen only on
+Zachary's explicit confirmation of the vote or BOD outcome.
 
 ## Step 8 — Report
 
