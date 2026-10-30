@@ -58,6 +58,25 @@ link — check message content, embeds, and attachments. Skip any message
 ID already listed in `reported.json` (`reported.json` dedupes anything
 already seen).
 
+### 2c. Refresh in-flight proposals (To Present / Up for Vote)
+Proposal documents evolve while they are being discussed. On every
+run, for each tracked proposal whose status is `To Present` or
+`Up for Vote`, re-read its document (the same read-only browser read
+as Step 3). If the document's substance has changed since the stored
+record — the changes themselves, the rationale, the title, or any
+explicitly designated line items — then:
+
+- update the JSON's `summary` bullets (and `name` / `line_items` when
+  they changed),
+- regenerate its `easypoll_blocks` from the updated summary,
+- update the summary in its GitHub issue body to match,
+- append a `field_update` event to `history.json` describing the
+  refresh.
+
+Proposals at `Passed Senate/Playtest` or beyond are not refreshed —
+their text is settled for our scope — and end-of-scope proposals are
+never touched (Step 7). (Rule set by Zachary 2026-10-30.)
+
 ## Step 3 — Read each proposal document
 
 `browser.open` cannot render Google Docs, so spawn one read-only browser
@@ -66,9 +85,11 @@ task per document. Ask it to return:
 - the proposal's name
 - exactly what it changes (old vs new wording where given)
 - the author's stated rationale
-- whether the document contains multiple distinct **line items** that
-  would each need their own vote (some proposals bundle several separable
-  changes; e.g. a line-item vote)
+- whether the document **explicitly calls out** any change as a
+  "line item" to be voted on separately. Only an explicit callout in
+  the document counts — never infer line items from the document's
+  structure, however separable the changes look (rule set by Zachary
+  2026-10-30).
 
 Never edit or comment on the docs.
 
@@ -82,9 +103,9 @@ Per proposal, produce:
 - the proposal name
 - up to 5 bullet points
 
-If the document has votable line items, call them out explicitly after
-the bullets so it's clear the proposal may need one poll per line item
-rather than a single poll.
+If — and only if — the document explicitly designates line-item votes,
+call them out after the bullets. Otherwise the proposal is a single
+all-or-nothing vote; do not split it.
 
 ## Step 5 — Build the poll blocks
 
@@ -93,9 +114,9 @@ Discord's `/poll` command:
 
 - Each block starts with `/poll ` (trailing space) followed by the
   question on the same line.
-- If the proposal has distinct line items, produce one poll block per
-  line item (question names the line item); otherwise a single poll
-  block for the whole proposal.
+- If the document explicitly designates line-item votes, produce one
+  poll block per designated line item (question names the line item);
+  otherwise a single all-or-nothing poll block for the whole proposal.
 
 | Field | Value |
 |---|---|
