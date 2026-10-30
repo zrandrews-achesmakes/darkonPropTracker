@@ -19,6 +19,9 @@
     "Adds two footnotes: 'may not be made into Scrolls' and 'may not be pouched'.",
     "Applies those footnotes to seven affected spell entries."
   ],
-  "vote_result": "passed",
+  "vote_result": [
+    "passed_senate",
+    "passed_bod"
+  ],
   "voted_at_senate": "2026-10-03"
 }
