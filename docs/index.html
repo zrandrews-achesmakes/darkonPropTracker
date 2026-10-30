@@ -113,11 +113,12 @@ const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH
 const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
 
 const COLUMNS=[
-  ['new','New','var(--new)'],['presented','Presented','var(--presented)'],
-  ['scheduled','Scheduled','var(--scheduled)'],['voted','Voted','var(--voted)'],
-  ['passed','Passed','var(--passed)'],['failed','Failed','var(--failed)'],
-  ['playtest','Playtest','var(--playtest)'],['withdrawn','Withdrawn','var(--withdrawn)'],
-  ['canceled','Canceled','var(--canceled)']
+  ['new proposals','New Proposals','var(--new)'],
+  ['discussed in senate','Discussed in Senate','var(--presented)'],
+  ['voted in senate','Voted in Senate','var(--voted)'],
+  ['approved by bod','Approved by BOD','var(--scheduled)'],
+  ['recorded on #passed-and-pending','Recorded on #passed-and-pending','var(--passed)'],
+  ['done','Done','var(--canceled)']
 ];
 
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -135,7 +136,7 @@ async function copyText(btn,text){
 }
 
 function cardHTML(p){
-  const colColor=(COLUMNS.find(c=>c[0]===p.status)||['','', 'var(--muted)'])[2];
+  const colColor=(COLUMNS.find(c=>c[0]===(p.status||'').toLowerCase())||['','', 'var(--muted)'])[2];
   const poster = p.posted_by && p.posted_by!==p.author
     ? `<div>Posted by: ${esc(p.posted_by_username||p.posted_by)}</div>` : '';
   const summary=(p.summary||[]).map(s=>`<li>${esc(s)}</li>`).join('');
@@ -153,7 +154,7 @@ function cardHTML(p){
     p.vote_result&&p.vote_result!=='unknown'?`Result: ${esc(p.vote_result)}`:''
   ].filter(Boolean).join(' · ');
   return `<article class="card">
-    <span class="pill" style="background:${colColor}">${esc(p.status||'new')}</span>
+    <span class="pill" style="background:${colColor}">${esc(p.status||'New Proposals')}</span>
     <h3>${esc(p.name||p.id)}</h3>
     <div class="meta"><div>Author: ${esc(p.author||'—')}</div>${poster}</div>
     ${summary?`<ul class="summary">${summary}</ul>`:''}
@@ -199,7 +200,7 @@ async function load(){
     const buckets={}; COLUMNS.forEach(c=>buckets[c[0]]=[]);
     const extra=[];
     proposals.forEach(p=>{
-      const s=(p.status||'new').toLowerCase();
+      const s=(p.status||'New Proposals').toLowerCase();
       if(buckets[s]) buckets[s].push(p);
       else { let b=extra.find(e=>e.key===s); if(!b){b={key:s,list:[]};extra.push(b);} b.list.push(p); }
     });
@@ -257,8 +258,8 @@ function buildAgenda(){
   const section=list=>list.length
     ? list.map(formatProposal).join('\n\n')
     : '*None*';
-  const votes=current.filter(p=>(p.status||'').toLowerCase()==='presented');
-  const discussion=current.filter(p=>(p.status||'').toLowerCase()==='new');
+  const votes=current.filter(p=>(p.status||'').toLowerCase()==='discussed in senate');
+  const discussion=current.filter(p=>(p.status||'').toLowerCase()==='new proposals');
 
   const agenda=[
     `# Senate Date: ${formattedDate}`,
