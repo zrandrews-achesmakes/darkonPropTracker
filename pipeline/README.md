@@ -10,7 +10,9 @@ Muse account — lives in this repo. No step requires the original machine.
    then `#proposal-discussions` is scanned for new proposal posts (each one
    links a Google Doc).
 2. Each linked doc is read and summarized: author, Discord post link,
-   proposal name, up to 5 bullets, and any separable line items.
+   proposal name, up to 5 bullets, and any line items the document itself
+   explicitly designates for separate votes (never inferred from
+   structure — see `../poll-format.json`).
 3. One JSON record per proposal is written to `proposals/<id>.json`
    (see `proposals/SCHEMA.md`), EasyPoll `/poll` blocks are generated from
    `poll-format.json`, and audit events go to `history.json`.
@@ -44,8 +46,11 @@ Neither credential is in this repo (by design). You need:
   Developer Portal, enable the **Message Content Intent**, invite the bot to
   your server. The token is sent with the `Bot ` prefix (added automatically
   if you omit it).
-- **GitHub fine-grained PAT** — scoped to this repo, **Contents: Read and
-  write**. Used only for pushing; reads of this public repo need no auth.
+- **GitHub PAT** — the current setup uses a **classic PAT** with `repo` +
+  `project` scopes: the workflow also creates issues and manages the
+  Project 2 board, which fine-grained PATs cannot do. A fine-grained PAT
+  with **Contents: Read and write** on this repo covers only the gh-sync
+  file push. Reads of this public repo need no auth.
 
 Wiring:
 
@@ -75,9 +80,12 @@ that can fetch the doc text read-only).
 
 ## Notes
 
-- These are portable snapshots taken 2026-09-27. If the workflow evolves,
-  re-export them from the author's workspace.
+- These are portable snapshots taken 2026-09-27 (wording corrected
+  2026-10-30 where the workflow's rules changed: line items, statuses,
+  PAT type). If the workflow evolves, re-export them from the author's
+  workspace.
 - A Discord `429` is a hard stop — never retry in a loop.
-- Automation never moves a `canceled` proposal to another status.
+- Automation never moves a proposal out of the end-of-scope statuses
+  (`Recorded on #passed-and-pending`, `Withdraw/Fail`).
 - `proposals/darkon-bot-test-prop.json` is a marked test record; real tooling
   should exclude it from public displays.
