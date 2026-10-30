@@ -33,14 +33,16 @@ cross-reference every proposal against it:
 
 | What you find | What to do |
 |---|---|
-| Tracked proposal with status `new` appears as presented | → `presented`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). |
-| Doc link whose document ID matches a tracked `new` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
+| Tracked proposal with status `New Proposals` appears as presented | → `Discussed in Senate`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). |
+| Doc link whose document ID matches a tracked `New Proposals` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
 | Doc link matching nothing tracked | Open it (read-only) and scan for outbound Google Doc links — the Senate may post one agenda doc linking to the individual proposal docs. Any outbound link matching a tracked proposal counts as presented. |
-| Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `new`, then immediately apply `new` → `presented` with a `status_change` event. |
-| Anything matching a `canceled` proposal | Leave it alone. Never resurrect. |
+| Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `New Proposals`, then immediately apply `New Proposals` → `Discussed in Senate` with a `status_change` event. |
+| Anything matching a `Done` proposal | Leave it alone. Never resurrect. |
 
-This `new` → `presented` move is the only automated forward transition
+This `New Proposals` → `Discussed in Senate` move is the only automated forward transition
 besides creation. Votes and outcomes still require explicit confirmation.
+Status values are exactly the Status options on the GitHub Project
+"Darkon Proposal Tracker" (projects/2) — see `proposals/SCHEMA.md`.
 ## Step 2 — Find new proposals in #proposal-discussions
 
 ### 2a. Determine the scan window
@@ -114,7 +116,8 @@ matching field.
 - Write one JSON tracking form per new proposal to `proposals/<id>.json`,
   following `proposals/SCHEMA.md` (author, poster, timestamps, post +
   doc links, summary bullets, line items, status, Senate dates, vote
-  result, notes). Generate its `easypoll_blocks` from `poll-format.json`
+  result, notes). New proposals start with status `New Proposals`.
+  Generate its `easypoll_blocks` from `poll-format.json`
   and store them in the JSON.
 - Append a `created` event to `history.json`; append a `status_change`
   event every time a proposal's status moves (actor: who made the
@@ -130,11 +133,14 @@ matching field.
 GitHub is the home for these files (the old Google Drive folder is
 deprecated); never leave the repo behind the local copies.
 
-## Step 7 — Respect canceled proposals
+## Step 7 — Respect Done proposals
 
-If a proposal's JSON has status `canceled`, leave it alone: no automated
+If a proposal's JSON has status `Done`, leave it alone: no automated
 run may move it to another status. It changes only on Zachary's explicit
-manual instruction.
+manual instruction. (Before the 2026-10-30 migration to the Project 2
+status options, this rule protected `canceled` proposals; `Done` is now
+the terminal status, and withdrawn/canceled outcomes are recorded in
+`notes` / `vote_result`.)
 
 ## Step 8 — Report
 
