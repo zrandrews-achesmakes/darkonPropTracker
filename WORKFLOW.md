@@ -33,7 +33,7 @@ cross-reference every proposal against it:
 
 | What you find | What to do |
 |---|---|
-| Tracked proposal with status `To Present` appears as presented | → `Up for Vote`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). Also convert the proposal's Project 2 draft item into a real GitHub issue in `zrandrews-achesmakes/darkonPropTracker` and record the link in the JSON's `github_issue_url` (items become issues when they move to Up for Vote). |
+| Tracked proposal with status `To Present` appears as presented | → `Up for Vote`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). (No GitHub step needed: the proposal's issue and Project 2 card already exist from creation — see Step 6a.) |
 | Doc link whose document ID matches a tracked `To Present` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
 | Doc link matching nothing tracked | Open it (read-only) and scan for outbound Google Doc links — the Senate may post one agenda doc linking to the individual proposal docs. Any outbound link matching a tracked proposal counts as presented. |
 | Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `To Present`, then immediately apply `To Present` → `Up for Vote` with a `status_change` event. |
@@ -119,6 +119,16 @@ matching field.
   result, notes). New proposals start with status `To Present`.
   Generate its `easypoll_blocks` from `poll-format.json`
   and store them in the JSON.
+- **Create its GitHub card:** create an issue in
+  `zrandrews-achesmakes/darkonPropTracker` titled with the proposal
+  name (body in the snapshot format the other proposal issues use:
+  Proposal ID, Author, Status, Vote results, Senate dates, line
+  items, Discord post, proposal document, summary bullets), add the
+  issue to Project 2 ("Darkon Proposal Tracker"), set its Status to
+  `To Present`, and record the issue link in the JSON's
+  `github_issue_url`. Every tracked proposal is an issue on Project 2
+  from creation — the public board reads the JSONs, but Project 2 only
+  shows cards that were created there.
 - Append a `created` event to `history.json`; append a `status_change`
   event every time a proposal's status moves (actor: who made the
   change).
