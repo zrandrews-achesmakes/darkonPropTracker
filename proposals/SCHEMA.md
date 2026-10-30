@@ -17,7 +17,7 @@ One JSON file per proposal in this directory, named `<id>.json`.
 | `github_issue_url` | string \| null | Link to the proposal's GitHub issue in `zrandrews-achesmakes/darkonPropTracker`. Set at creation: every proposal gets an issue there, added as a card on Project 2 at `To Present`, and the link is recorded here. |
 | `summary` | string[] | Up to 5 bullet points summarizing the proposal. |
 | `easypoll_blocks` | string[] | Copy-paste EasyPoll `/poll` blocks per `poll-format.json`, one per line item (or a single block for the whole proposal). Empty when no vote applies (e.g. test records). |
-| `line_items` | string[] | Separable items needing their own vote, if any. |
+| `line_items` | string[] | Items the document itself explicitly calls out as "line items" to vote on separately, if any (Zachary's 2026-10-30 rule: never infer them from separable structure; when the document designates none, this is empty and the poll is a single all-or-nothing block). |
 | `status` | string | Lifecycle stage. Must be exactly one of the Status options on the GitHub Project **Darkon Proposal Tracker** (Project 2, see below) — verbatim, case-sensitive. |
 | `presented_at_senate` | string \| null | Date (YYYY-MM-DD) of the Senate it was discussed at. |
 | `voted_at_senate` | string \| null | Date (YYYY-MM-DD) of the Senate it was voted at. |
