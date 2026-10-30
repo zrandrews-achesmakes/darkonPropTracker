@@ -49,3 +49,28 @@ the rulebook or withdrawn both close as `Done`, with the detail in
 | 4 | `Passed BOD` | `3ca57afe` | Passed in Senate and approved by the BOD. |
 | 5 | `Recorded on #passed-and-pending` | `d8219fdd` | Approved by BOD and posted on the Discord #passed-and-pending channel. End of our workflow for passed proposals. |
 | 6 | `Done` | `1de02fe0` | Closed out (written to the rulebook, or withdrawn). Terminal: no automated run may move a `Done` proposal to another status. It changes only on an explicit manual change by Zachary. |
+
+## Transitions — the two forks
+
+```
+To Present ──→ Up for Vote ──┬──→ Passed Senate/Playtest ──┬──→ Passed BOD ──→ Recorded on #passed-and-pending
+                             └──→ Done                     └──→ Done
+```
+
+- **Fork 1 — `Up for Vote`:** the Senate vote decides. Pass → `Passed
+  Senate/Playtest` (with `vote_result: passed` and `voted_at_senate`
+  set). Fail or withdrawn → `Done` (outcome recorded in `vote_result` /
+  `notes`).
+- **Fork 2 — `Passed Senate/Playtest`:** → `Passed BOD` when the BOD
+  approves it, or → `Done` if it closes without BOD approval (outcome
+  in `vote_result` / `notes`).
+- `Passed BOD` → `Recorded on #passed-and-pending` when it is posted
+  on that Discord channel.
+- **End of our scope: `Recorded on #passed-and-pending` and `Done`.**
+  Our workflow stops at either one — no automated run moves a proposal
+  out of either state, and later BOD-board stages (Pending
+  Publication, Rulebook Published) are not tracked here.
+- The only *automated* forward move is still `To Present` → `Up for
+  Vote` (when a proposal appears on #agenda-presenting). Every fork
+  move is manual, because vote and BOD outcomes only enter the tracker
+  from Zachary's explicit confirmation.
