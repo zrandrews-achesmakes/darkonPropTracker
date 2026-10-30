@@ -24,6 +24,8 @@
     "Line item 2: Did you drink enough water?",
     "Handled as a votable test case at Zachary's request — one poll block per line item."
   ],
-  "vote_result": null,
+  "vote_result": [
+    "withdrawn"
+  ],
   "voted_at_senate": null
 }
