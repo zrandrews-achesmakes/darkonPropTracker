@@ -20,7 +20,7 @@ One JSON file per proposal in this directory, named `<id>.json`.
 | `status` | string | Lifecycle stage. Must be exactly one of the Status options on the GitHub Project **Darkon Proposal Tracker** (Project 2, see below) — verbatim, case-sensitive. |
 | `presented_at_senate` | string \| null | Date (YYYY-MM-DD) of the Senate it was discussed at. |
 | `voted_at_senate` | string \| null | Date (YYYY-MM-DD) of the Senate it was voted at. |
-| `vote_result` | string \| null | `passed`, `failed`, `unknown`, or null if not yet voted. The vote *outcome* lives here, not in `status`. |
+| `vote_result` | string[] | The recorded decision outcomes — **a list that can hold more than one value** (see "vote_result values" below). Empty list `[]` when nothing has been decided yet. Outcomes live here, not in `status`. |
 | `notes` | string | Anything else (poll context, renames, outcome sources, withdrawals, etc.). |
 
 ## Status options
@@ -50,6 +50,25 @@ the rulebook or withdrawn both close as `Done`, with the detail in
 | 5 | `Recorded on #passed-and-pending` | `d8219fdd` | Approved by BOD and posted on the Discord #passed-and-pending channel. End of our workflow for passed proposals. |
 | 6 | `Done` | `1de02fe0` | Closed out (written to the rulebook, or withdrawn). Terminal: no automated run may move a `Done` proposal to another status. It changes only on an explicit manual change by Zachary. |
 
+## vote_result values
+
+Created 2026-10-30 at Zachary's direction. `vote_result` is an array;
+append a value each time one of these decisions happens, in the order
+they happen. A proposal that passes both bodies holds e.g.
+`["passed_senate", "passed_bod"]`.
+
+| Value | Recorded when |
+|---|---|
+| `passed_senate` | The Senate vote passes (Fork 1, pass branch). |
+| `failed_senate` | The Senate vote fails (Fork 1 → `Done`). |
+| `passed_bod` | The BOD approves the proposal (Fork 2, approve branch). |
+| `failed_bod` | The BOD rejects the proposal (Fork 2 → `Done`). |
+| `withdrawn` | The proposal is withdrawn at any point (closes as `Done`). |
+
+These replaced the old single-value scheme (`passed` / `failed` /
+`unknown` / null) on 2026-10-30; all existing records were backfilled
+and the conversions logged as `field_update` events in `history.json`.
+
 ## Transitions — the two forks
 
 ```
@@ -58,12 +77,13 @@ To Present ──→ Up for Vote ──┬──→ Passed Senate/Playtest ─�
 ```
 
 - **Fork 1 — `Up for Vote`:** the Senate vote decides. Pass → `Passed
-  Senate/Playtest` (with `vote_result: passed` and `voted_at_senate`
-  set). Fail or withdrawn → `Done` (outcome recorded in `vote_result` /
-  `notes`).
+  Senate/Playtest` (append `passed_senate` to `vote_result`, set
+  `voted_at_senate`). Fail → `Done` (append `failed_senate`).
+  Withdrawn → `Done` (append `withdrawn`).
 - **Fork 2 — `Passed Senate/Playtest`:** → `Passed BOD` when the BOD
-  approves it, or → `Done` if it closes without BOD approval (outcome
-  in `vote_result` / `notes`).
+  approves it (append `passed_bod`), or → `Done` if the BOD rejects
+  it (append `failed_bod`) or it otherwise closes without BOD
+  approval (detail in `notes`).
 - `Passed BOD` → `Recorded on #passed-and-pending` when it is posted
   on that Discord channel.
 - **End of our scope: `Recorded on #passed-and-pending` and `Done`.**
