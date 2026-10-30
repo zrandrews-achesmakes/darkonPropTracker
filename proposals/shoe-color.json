@@ -24,6 +24,9 @@
     "Historical footwear may be of any color (unchanged).",
     "Author explicitly intended this as two separate votes so neither change is a bridge too far."
   ],
-  "vote_result": "unknown",
+  "vote_result": [
+    "passed_senate",
+    "passed_bod"
+  ],
   "voted_at_senate": "2026-08-08"
 }
