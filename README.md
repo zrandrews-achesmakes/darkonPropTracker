@@ -35,3 +35,9 @@ To enumerate proposal files, use the repo tree:
 ```
 https://api.github.com/repos/zrandrews-achesmakes/darkonPropTracker/git/trees/main?recursive=1
 ```
+
+## Security and validation
+
+The board and publishing helpers include schema and URL validation, bounded data
+loading, and review-based publishing. See [SECURITY.md](SECURITY.md) for the trust
+boundary, repository protections, credential scopes, and test commands.

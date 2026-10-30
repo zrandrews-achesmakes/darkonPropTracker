@@ -33,7 +33,7 @@ CLI: `~/workspace/skills/discord/bin/discord` (Python, stdlib only).
 
 Messages print as JSON. A 429 is a hard stop: do not retry in a loop.
 
-Python CLIs must import `/opt/hatch/skills/skill-creator/bin/dynamic_credentials.py` and call `add_surrogate_to_request(...)`, `url_with_surrogate_query_param(...)`, or `url_with_surrogate_path_segment(...)` before authenticated requests, matching where the provider reads the key. If they use `urllib`, read JSON responses with `read_json_response(resp)` from the same helper instead of calling `resp.read()` directly. They must send only `hsurr:*` values, and only to the hosts below.
+Python CLIs must import `/opt/hatch/skills/skill-creator/bin/dynamic_credentials.py` and call `add_surrogate_to_request(...)`, `url_with_surrogate_query_param(...)`, or `url_with_surrogate_path_segment(...)` before authenticated requests, matching where the provider reads the key. Use the local `auth.open_authenticated(req, service)` wrapper for authenticated requests. It enforces the provider origin and disables redirects. Read JSON with the local `auth.read_json_response(resp)` wrapper. They must send only `hsurr:*` values, and only to the hosts below.
 
 ## Auth
 The credential is already stored; nothing here collects one. Never ask the user to paste a raw key in chat, set a secret environment variable, pass a secret flag, or write an auth file.
@@ -45,3 +45,4 @@ A 401 or 403 is a question about the request before it is a question about the k
 2. Restrict authenticated requests to: discord.com.
 3. Do not print, log, or persist raw credentials.
 4. If auth is missing or rejected, follow the Auth section rather than asking for a key.
+
