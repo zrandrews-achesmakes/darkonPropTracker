@@ -592,6 +592,86 @@
       "field": "summary/easypoll_blocks",
       "actor": "workflow",
       "note": "Doc refresh (WORKFLOW Step 2c) on 2026-10-30: the Class Symbol document had been edited 2026-10-03 into a two-option final voting version. Summary rewritten to cover both options; the old rationale bullet was dropped (no rationale in the current doc); poll blocks regenerated as one per option per the document's instruction that both options be put to a vote."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "class-symbol",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "monk-rogue-class-tweaks",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "non-combat-changes",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "pouch",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "shoe-color",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-10-30T16:47:54Z",
+      "proposal_id": "spell-footnotes",
+      "type": "field_update",
+      "field": "easypoll_blocks",
+      "actor": "zachary",
+      "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
     }
   ]
 }
