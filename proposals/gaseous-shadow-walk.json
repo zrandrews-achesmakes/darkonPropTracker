@@ -20,6 +20,8 @@
     "Normal armor and combat rules apply between them, but spells and skills remain barred while in form.",
     "Interacting with the physical world still breaks the spell."
   ],
-  "vote_result": "passed",
+  "vote_result": [
+    "passed_senate"
+  ],
   "voted_at_senate": "2026-10-03"
 }
