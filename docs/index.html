@@ -151,7 +151,7 @@ function cardHTML(p){
   const dates=[
     p.presented_at_senate?`Presented: ${fmtDate(p.presented_at_senate)}`:'',
     p.voted_at_senate?`Voted: ${fmtDate(p.voted_at_senate)}`:'',
-    p.vote_result&&p.vote_result!=='unknown'?`Result: ${esc(p.vote_result)}`:''
+    (Array.isArray(p.vote_result)?p.vote_result:(p.vote_result&&p.vote_result!=='unknown'?[p.vote_result]:[])).length?`Result: ${esc((Array.isArray(p.vote_result)?p.vote_result:[p.vote_result]).join(', '))}`:''
   ].filter(Boolean).join(' · ');
   return `<article class="card">
     <span class="pill" style="background:${colColor}">${esc(p.status||'To Present')}</span>
