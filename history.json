@@ -510,6 +510,33 @@
       ],
       "actor": "zachary",
       "note": "Zachary confirmed on 2026-10-30 that Gaseous failed BOD review; failed_bod appended, superseding the earlier same-day backfill that had left its BOD path undocumented."
+    },
+    {
+      "at": "2026-10-30T15:29:08Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "status_change",
+      "from": "Done",
+      "to": "Withdraw/Fail",
+      "actor": "zachary",
+      "note": "Status option renamed Done -> Withdraw/Fail on 2026-10-30 at Zachary's direction, matching the BOD board's label. No change in meaning or placement."
+    },
+    {
+      "at": "2026-10-30T15:29:08Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "status_change",
+      "from": "Done",
+      "to": "Withdraw/Fail",
+      "actor": "zachary",
+      "note": "Status option renamed Done -> Withdraw/Fail on 2026-10-30 at Zachary's direction, matching the BOD board's label. No change in meaning or placement."
+    },
+    {
+      "at": "2026-10-30T15:29:08Z",
+      "proposal_id": "darkon-bot-test-prop",
+      "type": "status_change",
+      "from": "Done",
+      "to": "Withdraw/Fail",
+      "actor": "zachary",
+      "note": "Status option renamed Done -> Withdraw/Fail on 2026-10-30 at Zachary's direction, matching the BOD board's label. No change in meaning or placement."
     }
   ]
 }
