@@ -12,7 +12,7 @@ Discord since the last Senate session, summarized and ready to poll.
 ## Step 1 — Determine the last Senate and update proposal statuses
 
 ### 1a. Load the last known Senate
-Read `state.json` → `last_senate` (currently 2026-08-08).
+Read `state.json` → `last_senate` (currently 2026-10-03).
 
 ### 1b. Check whether a newer Senate has happened
 Public schedule: https://www.darkon.org/index.php/events/
@@ -203,5 +203,6 @@ instructions) — no chat report on success.
 - `reported.json` — message IDs already surfaced (do not re-report).
 - `poll-format.json` — the EasyPoll `/poll` format: fields, vote options, line-item rule.
 - `history.json` — audit trail of proposal events (`created`, `baseline`, `status_change`, `field_update`).
-- Phase 2 (pending user approval of this workflow's output): per-proposal
-  `.json` tracking forms + a web app to display and update their statuses.
+- The public board (`docs/index.html`, served via GitHub Pages) reads
+  the proposal JSONs live on each load; it is display-only — all writes
+  happen through this workflow.
