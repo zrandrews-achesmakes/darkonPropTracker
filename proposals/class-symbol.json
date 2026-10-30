@@ -21,6 +21,6 @@
     "Removes 'Symbol' from the class charts.",
     "Rationale: class symbols are not defined anywhere in the rules today."
   ],
-  "vote_result": null,
+  "vote_result": [],
   "voted_at_senate": null
 }
