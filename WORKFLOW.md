@@ -68,7 +68,7 @@ explicitly designated line items — then:
 
 - update the JSON's `summary` bullets (and `name` / `line_items` when
   they changed),
-- regenerate its `easypoll_blocks` from the updated summary,
+- regenerate its `easypoll_blocks` to match (Step 5 format),
 - update the summary in its GitHub issue body to match,
 - append a `field_update` event to `history.json` describing the
   refresh.
@@ -121,7 +121,7 @@ Discord's `/poll` command:
 | Field | Value |
 |---|---|
 | `question` | "<Proposal name> by <Author>" |
-| `text` | author, post link, doc link wrapped in `< >` (suppresses the Discord link preview), then the bullet summary (this text appears above the poll) |
+| `text` | author, post link, doc link wrapped in `< >` (suppresses the Discord link preview). **No summary block** — summaries live in the record and on the board cards, not in poll blocks (this text appears above the poll) |
 | `answer-1` | "Yes" |
 | `answer-2` | "No" |
 | `answer-3` | "Abstain" |
