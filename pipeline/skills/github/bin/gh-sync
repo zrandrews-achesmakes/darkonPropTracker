@@ -1,128 +1,165 @@
 #!/usr/bin/env python3
-"""Push a local directory tree to a GitHub repo via the Contents API.
+"""Validate public data, then publish one atomic automation branch and PR.
 
-Usage:
-  gh-sync --repo OWNER/REPO --dir LOCAL_DIR [--branch main] [--message MSG]
-
-Upserts every file under LOCAL_DIR (except .git/) to the repo, creating or
-updating as needed. Skips files whose content is unchanged. Each changed file
-becomes one API commit. SSH is not required.
-
-Portable auth: uses the Muse Secure Vault helper when available, otherwise
-the GITHUB_TOKEN environment variable. This script never sees, prints, or
-persists the raw token beyond the requests it signs.
+Only allowlisted JSON files are read. No code, dotfiles, symlinks, or arbitrary
+directory contents are uploaded. --dry-run needs no credentials or network.
 """
 import argparse
 import base64
-import hashlib
 import json
 import os
+from pathlib import Path
+import re
+import stat
 import sys
 import urllib.error
-import urllib.parse
 import urllib.request
 
-sys.path.insert(0, os.path.normpath(
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..")))
-from auth import attach_auth, read_json_response, read_response_body
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+from auth import open_authenticated, read_json_response
+from validation import (MAX_FILE_BYTES, ROOT_FILES, SLUG, parse_data, require,
+                        validate_automation_change, validate_snapshot)
 
 API = "https://api.github.com"
-UA = {"User-Agent": "DarkonGithubSkill/1.0",
-      "Accept": "application/vnd.github+json"}
 
 
-def api_request(method, url, payload=None):
+def api_request(method, path, payload=None):
+    headers = {"User-Agent": "DarkonGithubSkill/2.0",
+               "Accept": "application/vnd.github+json",
+               "X-GitHub-Api-Version": "2022-11-28"}
     data = None
-    headers = dict(UA)
     if payload is not None:
         data = json.dumps(payload).encode("utf-8")
         headers["Content-Type"] = "application/json"
-    req = urllib.request.Request(url, data=data, headers=headers, method=method)
-    attach_auth(req, "github")
+    req = urllib.request.Request(API + path, data=data, headers=headers, method=method)
     try:
-        with urllib.request.urlopen(req, timeout=30) as resp:
-            return resp.status, read_json_response(resp)
+        with open_authenticated(req, "github") as resp:
+            return read_json_response(resp)
     except urllib.error.HTTPError as exc:
-        body = read_response_body(exc).decode("utf-8", errors="replace")[:500]
-        return exc.code, {"_error": body}
+        raise RuntimeError(f"GitHub API request failed ({exc.code})") from None
 
 
-def blob_sha(content_bytes):
-    """Git blob SHA, matching what the Contents API returns."""
-    header = f"blob {len(content_bytes)}\0".encode("ascii")
-    return hashlib.sha1(header + content_bytes).hexdigest()
+def is_link(path):
+    return path.is_symlink() or (hasattr(path, "is_junction") and path.is_junction())
 
 
-def get_sha(repo, path, branch):
-    url = f"{API}/repos/{repo}/contents/{urllib.parse.quote(path)}?ref={urllib.parse.quote(branch)}"
-    status, data = api_request("GET", url)
-    if status == 200:
-        return data.get("sha")
-    return None
+def read_public_file(root, path):
+    require(not is_link(path), "symlink/junction selected for publishing")
+    require(path.resolve().is_relative_to(root), "file escapes publishing directory")
+    expected = path.lstat()
+    require(stat.S_ISREG(expected.st_mode), "only regular files may be published")
+    require(expected.st_nlink == 1, "hard-linked files may not be published")
+    flags = (os.O_RDONLY | getattr(os, "O_NOFOLLOW", 0) | getattr(os, "O_BINARY", 0)
+             | getattr(os, "O_NONBLOCK", 0))
+    fd = os.open(path, flags)
+    with os.fdopen(fd, "rb") as fh:
+        info = os.fstat(fh.fileno())
+        require(os.path.samestat(expected, info), "file changed while opening")
+        require(stat.S_ISREG(info.st_mode), "only regular files may be published")
+        require(info.st_size <= MAX_FILE_BYTES, "file exceeds size limit")
+        raw = fh.read(MAX_FILE_BYTES + 1)
+    require(len(raw) <= MAX_FILE_BYTES, "file exceeds size limit")
+    return raw
 
 
-def put_file(repo, path, content_bytes, branch, message, sha):
-    url = f"{API}/repos/{repo}/contents/{urllib.parse.quote(path)}"
-    payload = {
-        "message": message,
-        "content": base64.b64encode(content_bytes).decode("ascii"),
-        "branch": branch,
-    }
-    if sha:
-        payload["sha"] = sha
-    return api_request("PUT", url, payload)
+def collect_files(directory):
+    candidate = Path(directory).expanduser().absolute()
+    require(not is_link(candidate), "publishing root must not be a symlink/junction")
+    root = candidate.resolve(strict=True)
+    proposal_dir = root / "proposals"
+    require(not is_link(proposal_dir) and proposal_dir.is_dir(), "invalid proposals directory")
+    paths = [root / p for p in ROOT_FILES]
+    for path in sorted(proposal_dir.glob("*.json")):
+        require(bool(SLUG.fullmatch(path.stem)), "invalid proposal filename")
+        paths.append(path)
+    files = {p.relative_to(root).as_posix(): read_public_file(root, p) for p in paths}
+    validate_snapshot(files)
+    return files
+
+
+def publish(repo, branch, base, files, message):
+    require(bool(re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", repo)), "invalid repository")
+    require(bool(re.fullmatch(r"automation/[a-z0-9]+(?:-[a-z0-9]+)*", branch)),
+            "use a fresh automation/<run-name> branch")
+    require(base == "main", "the reviewed publishing base must be main")
+    prefix = f"/repos/{repo}"
+    base_commit = api_request("GET", prefix + "/git/ref/heads/main")["object"]["sha"]
+    commit = api_request("GET", prefix + "/git/commits/" + base_commit)
+    tree_sha = commit["tree"]["sha"]
+    tree = api_request("GET", prefix + "/git/trees/" + tree_sha + "?recursive=1")
+    require(not tree.get("truncated"), "base tree is truncated")
+    existing = {n["path"]: n for n in tree["tree"] if n["type"] == "blob"}
+    require(all(p in files for p in existing if p.startswith("proposals/") and p.endswith(".json")),
+            "snapshot omits an existing proposal")
+    parsed = validate_snapshot(files)
+    changes = []
+    # Complete every read and validation before the first GitHub write.
+    for path, raw in files.items():
+        before_raw = None
+        if path in existing:
+            require(existing[path]["mode"] == "100644", "base data is not a regular file")
+            blob = api_request("GET", prefix + "/git/blobs/" + existing[path]["sha"])
+            before_raw = base64.b64decode(blob["content"])
+        if before_raw == raw:
+            continue
+        if path.startswith("proposals/"):
+            before = parse_data(before_raw) if before_raw is not None else None
+            validate_automation_change(before, parsed[path])
+            if before is None and parsed[path].get("github_issue_url") is not None:
+                require(parsed[path]["github_issue_url"].startswith(f"https://github.com/{repo}/issues/"),
+                        "new issue link must belong to the publishing repository")
+        if path == "history.json" and before_raw is not None:
+            old_events = parse_data(before_raw)["events"]
+            require(parsed[path]["events"][:len(old_events)] == old_events,
+                    "automation may only append history events")
+        if path == "reported.json" and before_raw is not None:
+            old_ids = parse_data(before_raw)["reported_message_ids"]
+            require(set(old_ids) <= set(parsed[path]["reported_message_ids"]),
+                    "automation may not remove reported IDs")
+        changes.append((path, raw))
+    if not changes:
+        print("No data changes; no branch or PR created.")
+        return
+    elements = []
+    for path, raw in changes:
+        blob = api_request("POST", prefix + "/git/blobs", {
+            "content": base64.b64encode(raw).decode("ascii"), "encoding": "base64"})
+        elements.append({"path": path, "mode": "100644", "type": "blob", "sha": blob["sha"]})
+    tree = api_request("POST", prefix + "/git/trees", {"base_tree": tree_sha, "tree": elements})
+    new_commit = api_request("POST", prefix + "/git/commits", {
+        "message": message, "tree": tree["sha"], "parents": [base_commit]})
+    api_request("POST", prefix + "/git/refs", {
+        "ref": "refs/heads/" + branch, "sha": new_commit["sha"]})
+    pr = api_request("POST", prefix + "/pulls", {
+        "title": message[:200], "head": branch, "base": base,
+        "body": "Validated proposal data update. Review source documents and the data diff before merging.\n\n"
+                "gh-sync checked schemas, destination URLs, protected fields, terminal statuses, "
+                "and append-only history. No code files are published by this tool."})
+    print("Review required: " + pr["html_url"])
 
 
 def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--repo", required=True, help="OWNER/REPO")
-    ap.add_argument("--dir", required=True, help="Local directory to sync")
-    ap.add_argument("--branch", default="main")
-    ap.add_argument("--message", default="Sync Darkon proposal tracker files")
-    args = ap.parse_args()
-
-    local_dir = os.path.abspath(os.path.expanduser(args.dir))
-    if not os.path.isdir(local_dir):
-        print(f"error: not a directory: {local_dir}", file=sys.stderr)
-        return 1
-
-    files = []
-    for root, dirs, names in os.walk(local_dir):
-        if ".git" in dirs:
-            dirs.remove(".git")
-        if "__pycache__" in dirs:
-            dirs.remove("__pycache__")
-        for name in sorted(names):
-            full = os.path.join(root, name)
-            rel = os.path.relpath(full, local_dir).replace(os.sep, "/")
-            files.append((rel, full))
-
-    if not files:
-        print("nothing to sync: no files found", file=sys.stderr)
-        return 1
-
-    ok, skipped, failed = 0, 0, []
-    for rel, full in files:
-        with open(full, "rb") as fh:
-            content = fh.read()
-        sha = get_sha(args.repo, rel, args.branch)
-        if sha and sha == blob_sha(content):
-            skipped += 1
-            continue
-        action = "update" if sha else "create"
-        status, data = put_file(args.repo, rel, content, args.branch,
-                               f"{args.message} ({rel})", sha)
-        if status in (200, 201):
-            print(f"{action}d: {rel}")
-            ok += 1
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--repo", required=True, help="OWNER/REPO")
+    parser.add_argument("--dir", required=True)
+    parser.add_argument("--branch", help="Fresh automation/<run-name> branch; never main")
+    parser.add_argument("--base", default="main", choices=["main"])
+    parser.add_argument("--message", default="Update Darkon proposal data")
+    parser.add_argument("--dry-run", action="store_true", help="Validate local files only; no network")
+    args = parser.parse_args()
+    try:
+        files = collect_files(args.dir)
+        if args.dry_run:
+            print(f"Validated {len(files)} allowlisted JSON files; no network requests made.")
         else:
-            err = data.get("_error", "?") if isinstance(data, dict) else "?"
-            print(f"FAILED ({status}): {rel}: {err}", file=sys.stderr)
-            failed.append(rel)
-
-    print(f"done: {ok} synced, {skipped} unchanged, {len(failed)} failed")
-    return 1 if failed else 0
+            require(args.branch is not None, "--branch automation/<run-name> is required")
+            publish(args.repo, args.branch, args.base, files, args.message)
+        return 0
+    except (ValueError, OSError, RuntimeError, KeyError) as exc:
+        print("Publishing stopped: " + str(exc), file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
     sys.exit(main())
+

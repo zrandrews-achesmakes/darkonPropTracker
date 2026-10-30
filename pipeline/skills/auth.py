@@ -14,6 +14,8 @@ import json
 import os
 import sys
 import urllib.request
+import urllib.error
+from urllib.parse import urlsplit
 
 _MUSE_HELPER = "/opt/hatch/skills/skill-creator/bin"
 
@@ -45,12 +47,13 @@ def _muse_attach(req, cred, allowed_hosts):
         add_surrogate_to_request(req, cred, allowed_hosts=allowed_hosts)
         return True
     except Exception:
-        return False
+        raise SystemExit("auth error: vault injection failed; refusing credential fallback") from None
 
 
 def attach_auth(req, service):
     """Attach auth for ``service`` ("discord" or "github") to a Request."""
     spec = _SPECS[service]
+    check_destination(req.full_url, service)
     if _muse_attach(req, spec["cred"], spec["hosts"]):
         return
     token = (os.environ.get(spec["env"]) or "").strip()
@@ -60,7 +63,33 @@ def attach_auth(req, service):
             "variable, or connect the Muse vault entry %s." % (
                 service, spec["env"], spec["cred"])
         )
-    req.add_header("Authorization", spec["header"](token))
+    req.add_unredirected_header("Authorization", spec["header"](token))
+
+
+def check_destination(url, service):
+    """Apply the same destination policy to vault and environment credentials."""
+    try:
+        u = urlsplit(url)
+        valid = (u.scheme == "https" and u.hostname in _SPECS[service]["hosts"]
+                 and u.port in (None, 443) and u.username is None
+                 and u.password is None and not u.fragment)
+    except ValueError:
+        valid = False
+    if not valid:
+        raise ValueError("refusing authenticated request outside the service origin")
+
+
+class NoAuthRedirects(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        if fp is not None:
+            fp.close()
+        raise urllib.error.HTTPError(req.full_url, code,
+                                     "authenticated redirects are disabled", headers, None)
+
+
+def open_authenticated(req, service, timeout=30):
+    attach_auth(req, service)
+    return urllib.request.build_opener(NoAuthRedirects()).open(req, timeout=timeout)
 
 
 def read_json_response(resp):
@@ -72,3 +101,4 @@ def read_response_body(exc):
         return exc.read()
     except Exception:
         return b""
+
