@@ -574,6 +574,16 @@
       "to": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/10",
       "actor": "workflow",
       "note": "GitHub issue #10 created in darkonPropTracker and added as a card on Project 2 with status To Present (Zachary flagged that the ad-hoc run had created the tracker record without a project card; card creation is now part of the workflow)."
+    },
+    {
+      "at": "2026-10-30T16:32:30Z",
+      "proposal_id": "monk-rogue-class-tweaks",
+      "type": "field_update",
+      "field": "easypoll_blocks/line_items",
+      "from": "6 line-item poll blocks",
+      "to": "1 all-or-nothing poll block",
+      "actor": "zachary",
+      "note": "Zachary's 2026-10-30 rule adjustment: line items are created only when the document itself calls out a change as a line item to vote on; otherwise the poll is a single all-or-nothing vote. The Monk/Rogue document designates no line items, so its six inferred blocks were replaced with one combined block and line_items cleared."
     }
   ]
 }
