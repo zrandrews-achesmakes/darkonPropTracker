@@ -8,7 +8,7 @@
   "id": "gaseous-shadow-walk",
   "line_items": [],
   "name": "Gaseous Form changes / Spectre Form",
-  "notes": "Author renamed the proposal after August 8 Senate feedback (originally framed as Gaseous Form changes).",
+  "notes": "Author renamed the proposal after August 8 Senate feedback (originally framed as Gaseous Form changes). BOD outcome confirmed by Zachary on 2026-10-30: the BOD did not approve it (failed_bod) — which is why the proposal closed as Done rather than Recorded.",
   "posted_at": "2026-07-22T15:06:00Z",
   "posted_by": "Erik Helson",
   "posted_by_username": "that__one__dude",
@@ -21,7 +21,8 @@
     "Interacting with the physical world still breaks the spell."
   ],
   "vote_result": [
-    "passed_senate"
+    "passed_senate",
+    "failed_bod"
   ],
   "voted_at_senate": "2026-10-03"
 }
