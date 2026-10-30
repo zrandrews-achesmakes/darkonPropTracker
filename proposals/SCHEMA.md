@@ -31,24 +31,24 @@ https://github.com/users/zrandrews-achesmakes/projects/2
 `PVTSSF_lAHOE7xLmc4BmfHqzhlH9tQ`), verified live on 2026-10-30.
 Use the option name verbatim as the JSON `status` value.
 
-The first four names also match the statuses the Darkon BOD uses on its
-own board (adopted at Zachary's direction on 2026-10-30: New Proposals →
+Five of the names match the statuses the Darkon BOD uses on its own
+board (adopted at Zachary's direction on 2026-10-30: New Proposals →
 To Present, Discussed in Senate → Up for Vote, Voted in Senate → Passed
-Senate/Playtest, Approved by BOD → Passed BOD). Our workflow **ends at
-`Recorded on #passed-and-pending` or `Done`** — the BOD board's later
-stages (`Pending Publication`, `Rulebook Published`) and its
-`Withdraw/Fail` stage are not used here; a proposal that is written into
-the rulebook or withdrawn both close as `Done`, with the detail in
-`vote_result` / `notes`.
+Senate/Playtest, Approved by BOD → Passed BOD, and `Done` renamed to
+`Withdraw/Fail` later the same day). Our workflow **ends at
+`Recorded on #passed-and-pending` or `Withdraw/Fail`** — the BOD
+board's later stages (`Pending Publication`, `Rulebook Published`) are
+not used here; a proposal that fails or is withdrawn closes as
+`Withdraw/Fail`, with the detail in `vote_result` / `notes`.
 
 | # | Status value | Option ID | Meaning |
 |---|---|---|---|
-| 1 | `To Present` | `e31064a4` | Posted, not yet presented / discussed at a Senate. |
-| 2 | `Up for Vote` | `ac134f43` | Discussed at a Senate, awaiting a vote. |
-| 3 | `Passed Senate/Playtest` | `a8eef09e` | Passed by the Senate (or approved for playtest), pending BOD approval. See `vote_result` for the outcome. |
-| 4 | `Passed BOD` | `3ca57afe` | Passed in Senate and approved by the BOD. |
-| 5 | `Recorded on #passed-and-pending` | `d8219fdd` | Approved by BOD and posted on the Discord #passed-and-pending channel. End of our workflow for passed proposals. |
-| 6 | `Done` | `1de02fe0` | Closed out (written to the rulebook, or withdrawn). Terminal: no automated run may move a `Done` proposal to another status. It changes only on an explicit manual change by Zachary. |
+| 1 | `To Present` | `1cd71177` | Posted, not yet presented / discussed at a Senate. |
+| 2 | `Up for Vote` | `b9e5995a` | Discussed at a Senate, awaiting a vote. |
+| 3 | `Passed Senate/Playtest` | `0c28d581` | Passed by the Senate (or approved for playtest), pending BOD approval. See `vote_result` for the outcome. |
+| 4 | `Passed BOD` | `d999f782` | Passed in Senate and approved by the BOD. |
+| 5 | `Recorded on #passed-and-pending` | `982aad20` | Approved by BOD and posted on the Discord #passed-and-pending channel. End of our workflow for passed proposals. |
+| 6 | `Withdraw/Fail` | `ce3191df` | Closed out without taking effect — withdrawn, failed a Senate vote, or rejected by the BOD (detail in `vote_result`). Terminal: no automated run may move a `Withdraw/Fail` proposal to another status. It changes only on an explicit manual change by Zachary. (Named `Done` until the 2026-10-30 rename.) |
 
 ## vote_result values
 
@@ -60,10 +60,10 @@ they happen. A proposal that passes both bodies holds e.g.
 | Value | Recorded when |
 |---|---|
 | `passed_senate` | The Senate vote passes (Fork 1, pass branch). |
-| `failed_senate` | The Senate vote fails (Fork 1 → `Done`). |
+| `failed_senate` | The Senate vote fails (Fork 1 → `Withdraw/Fail`). |
 | `passed_bod` | The BOD approves the proposal (Fork 2, approve branch). |
-| `failed_bod` | The BOD rejects the proposal (Fork 2 → `Done`). |
-| `withdrawn` | The proposal is withdrawn at any point (closes as `Done`). |
+| `failed_bod` | The BOD rejects the proposal (Fork 2 → `Withdraw/Fail`). |
+| `withdrawn` | The proposal is withdrawn at any point (closes as `Withdraw/Fail`). |
 
 These replaced the old single-value scheme (`passed` / `failed` /
 `unknown` / null) on 2026-10-30; all existing records were backfilled
@@ -73,20 +73,20 @@ and the conversions logged as `field_update` events in `history.json`.
 
 ```
 To Present ──→ Up for Vote ──┬──→ Passed Senate/Playtest ──┬──→ Passed BOD ──→ Recorded on #passed-and-pending
-                             └──→ Done                     └──→ Done
+                             └──→ Withdraw/Fail            └──→ Withdraw/Fail
 ```
 
 - **Fork 1 — `Up for Vote`:** the Senate vote decides. Pass → `Passed
   Senate/Playtest` (append `passed_senate` to `vote_result`, set
-  `voted_at_senate`). Fail → `Done` (append `failed_senate`).
-  Withdrawn → `Done` (append `withdrawn`).
+  `voted_at_senate`). Fail → `Withdraw/Fail` (append `failed_senate`).
+  Withdrawn → `Withdraw/Fail` (append `withdrawn`).
 - **Fork 2 — `Passed Senate/Playtest`:** → `Passed BOD` when the BOD
-  approves it (append `passed_bod`), or → `Done` if the BOD rejects
+  approves it (append `passed_bod`), or → `Withdraw/Fail` if the BOD rejects
   it (append `failed_bod`) or it otherwise closes without BOD
   approval (detail in `notes`).
 - `Passed BOD` → `Recorded on #passed-and-pending` when it is posted
   on that Discord channel.
-- **End of our scope: `Recorded on #passed-and-pending` and `Done`.**
+- **End of our scope: `Recorded on #passed-and-pending` and `Withdraw/Fail`.**
   Our workflow stops at either one — no automated run moves a proposal
   out of either state, and later BOD-board stages (Pending
   Publication, Rulebook Published) are not tracked here.
