@@ -33,13 +33,13 @@ cross-reference every proposal against it:
 
 | What you find | What to do |
 |---|---|
-| Tracked proposal with status `New Proposals` appears as presented | → `Discussed in Senate`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). |
-| Doc link whose document ID matches a tracked `New Proposals` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
+| Tracked proposal with status `To Present` appears as presented | → `Up for Vote`. Set `presented_at_senate` to that Senate's date. Append a `status_change` event to `history.json` (actor: `workflow`). |
+| Doc link whose document ID matches a tracked `To Present` proposal (match on the `/d/<id>/` part; ignore suffixes like `/edit` or `?usp=sharing`) | Same as above. |
 | Doc link matching nothing tracked | Open it (read-only) and scan for outbound Google Doc links — the Senate may post one agenda doc linking to the individual proposal docs. Any outbound link matching a tracked proposal counts as presented. |
-| Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `New Proposals`, then immediately apply `New Proposals` → `Discussed in Senate` with a `status_change` event. |
+| Still no match after the outbound-link check | It's a proposal that went straight to the agenda: create its JSON as `To Present`, then immediately apply `To Present` → `Up for Vote` with a `status_change` event. |
 | Anything matching a `Done` proposal | Leave it alone. Never resurrect. |
 
-This `New Proposals` → `Discussed in Senate` move is the only automated forward transition
+This `To Present` → `Up for Vote` move is the only automated forward transition
 besides creation. Votes and outcomes still require explicit confirmation.
 Status values are exactly the Status options on the GitHub Project
 "Darkon Proposal Tracker" (projects/2) — see `proposals/SCHEMA.md`.
@@ -116,7 +116,7 @@ matching field.
 - Write one JSON tracking form per new proposal to `proposals/<id>.json`,
   following `proposals/SCHEMA.md` (author, poster, timestamps, post +
   doc links, summary bullets, line items, status, Senate dates, vote
-  result, notes). New proposals start with status `New Proposals`.
+  result, notes). New proposals start with status `To Present`.
   Generate its `easypoll_blocks` from `poll-format.json`
   and store them in the JSON.
 - Append a `created` event to `history.json`; append a `status_change`
