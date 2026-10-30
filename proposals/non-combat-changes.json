@@ -20,6 +20,9 @@
     "Keeps six total levels, three per outside class, and current-rank restrictions.",
     "Includes a proposed class-by-class combat/non-combat classification."
   ],
-  "vote_result": "passed",
+  "vote_result": [
+    "passed_senate",
+    "passed_bod"
+  ],
   "voted_at_senate": "2026-10-03"
 }
