@@ -584,6 +584,14 @@
       "to": "1 all-or-nothing poll block",
       "actor": "zachary",
       "note": "Zachary's 2026-10-30 rule adjustment: line items are created only when the document itself calls out a change as a line item to vote on; otherwise the poll is a single all-or-nothing vote. The Monk/Rogue document designates no line items, so its six inferred blocks were replaced with one combined block and line_items cleared."
+    },
+    {
+      "at": "2026-10-30T16:39:18Z",
+      "proposal_id": "class-symbol",
+      "type": "field_update",
+      "field": "summary/easypoll_blocks",
+      "actor": "workflow",
+      "note": "Doc refresh (WORKFLOW Step 2c) on 2026-10-30: the Class Symbol document had been edited 2026-10-03 into a two-option final voting version. Summary rewritten to cover both options; the old rationale bullet was dropped (no rationale in the current doc); poll blocks regenerated as one per option per the document's instruction that both options be put to a vote."
     }
   ]
 }
