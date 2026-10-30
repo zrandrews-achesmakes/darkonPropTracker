@@ -384,6 +384,117 @@
       "to": "Up for Vote",
       "actor": "zachary",
       "note": "Status renamed on 2026-10-30 to align with the BOD board statuses, at Zachary's direction: Discussed in Senate -> Up for Vote. Same stage, new name; Project 2 Status option renamed to match."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "bod-bylaws-reconsideration",
+      "type": "field_update",
+      "from": null,
+      "to": [],
+      "actor": "zachary",
+      "note": "vote_result converted to the multi-value array format on 2026-10-30; no outcomes recorded yet, so it is empty."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "class-symbol",
+      "type": "field_update",
+      "from": null,
+      "to": [],
+      "actor": "zachary",
+      "note": "vote_result converted to the multi-value array format on 2026-10-30; no outcomes recorded yet, so it is empty."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "darkon-bot-test-prop",
+      "type": "field_update",
+      "from": null,
+      "to": [
+        "withdrawn"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['withdrawn'] on 2026-10-30 under the new multi-value scheme (test record, withdrawn at Zachary's direction in Sept 2026)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "gaseous-shadow-walk",
+      "type": "field_update",
+      "from": "passed",
+      "to": [
+        "passed_senate"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; its Done status does not document a BOD outcome, so no passed_bod value was added)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "non-combat-changes",
+      "type": "field_update",
+      "from": "passed",
+      "to": [
+        "passed_senate",
+        "passed_bod"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; its Recorded status per Project 2 means BOD-approved and posted on #passed-and-pending)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "pouch",
+      "type": "field_update",
+      "from": "passed",
+      "to": [
+        "passed_senate",
+        "passed_bod"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; Recorded status per Project 2 means BOD-approved)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "shillelagh-shield-break",
+      "type": "field_update",
+      "from": null,
+      "to": [
+        "withdrawn"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['withdrawn'] on 2026-10-30 under the new multi-value scheme."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "shoe-color",
+      "type": "field_update",
+      "from": "unknown",
+      "to": [
+        "passed_senate",
+        "passed_bod"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (replaces 'unknown': the proposal passed at the 2026-08-08 Senate per its notes, and its Recorded status per Project 2 means BOD-approved)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "simplified-touch-spell-damage",
+      "type": "field_update",
+      "from": "passed",
+      "to": [
+        "passed_senate",
+        "passed_bod"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; Recorded status per Project 2 means BOD-approved)."
+    },
+    {
+      "at": "2026-10-30T15:22:55Z",
+      "proposal_id": "spell-footnotes",
+      "type": "field_update",
+      "from": "passed",
+      "to": [
+        "passed_senate",
+        "passed_bod"
+      ],
+      "actor": "zachary",
+      "note": "vote_result set to ['passed_senate','passed_bod'] on 2026-10-30 under the new multi-value scheme (passed at the 2026-10-03 Senate; Recorded status per Project 2 means BOD-approved)."
     }
   ]
 }
