@@ -10,7 +10,9 @@ Tracks rule proposals from the Darkon Crownlands Community Discord
   read, summarized, recorded, and pushed.
 - `proposals/` — one JSON record per proposal (`SCHEMA.md` documents the
   fields). `status` is the authoritative lifecycle field; `easypoll_blocks`
-  holds ready-to-paste `/poll` blocks (one per votable line item).
+  holds ready-to-paste `/poll` blocks — a single all-or-nothing block per
+  proposal, or one per line item only when the proposal document itself
+  explicitly designates line-item votes.
 - `poll-format.json` — the EasyPoll block format: fields, exact Yes / No /
   Abstain options, line-item rule.
 - `history.json` — audit trail of proposal events.
