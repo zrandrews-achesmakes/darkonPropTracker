@@ -12,12 +12,12 @@
     "Did you drink enough water?"
   ],
   "name": "Darkon Bot Test Prop",
-  "notes": "TEST RECORD — not a real Senate proposal. ZiggityCheese posted this to test his own proposal-tracking automation (\"Sorry for the testing spam\"). The linked doc currently contains the title plus two line items: “Is there a Goose here?” and “Did you drink enough water?” Zachary asked that it be tracked rather than ignored. Status was briefly set to canceled via the private editor on 2026-09-27, then moved back to new at Zachary’s request the same day; he then asked that it be treated as a votable test case with one poll per line item.",
+  "notes": "TEST RECORD — not a real Senate proposal. ZiggityCheese posted this to test his own proposal-tracking automation (\"Sorry for the testing spam\"). The linked doc currently contains the title plus two line items: “Is there a Goose here?” and “Did you drink enough water?” Zachary asked that it be tracked rather than ignored. Status was briefly set to canceled via the private editor on 2026-09-27, then moved back to new at Zachary’s request the same day; he then asked that it be treated as a votable test case with one poll per line item. Migrated to Done on 2026-10-30 as the terminal Project 2 status (test record, previously withdrawn; it is not an item on Project 2).",
   "posted_at": "2026-09-27T16:32:05Z",
   "posted_by": "ZiggityCheese",
   "posted_by_username": "ziggitycheese",
   "presented_at_senate": null,
-  "status": "withdrawn",
+  "status": "Done",
   "summary": [
     "Test proposal posted by ZiggityCheese for his proposal-tracking automation; explicitly not a real rule change.",
     "Line item 1: Is there a Goose here?",
