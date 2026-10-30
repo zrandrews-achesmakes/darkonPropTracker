@@ -113,10 +113,10 @@ const TREE_URL=`https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH
 const rawUrl=p=>`https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/${p}`;
 
 const COLUMNS=[
-  ['new proposals','New Proposals','var(--new)'],
-  ['discussed in senate','Discussed in Senate','var(--presented)'],
-  ['voted in senate','Voted in Senate','var(--voted)'],
-  ['approved by bod','Approved by BOD','var(--scheduled)'],
+  ['to present','To Present','var(--new)'],
+  ['up for vote','Up for Vote','var(--presented)'],
+  ['passed senate/playtest','Passed Senate/Playtest','var(--voted)'],
+  ['passed bod','Passed BOD','var(--scheduled)'],
   ['recorded on #passed-and-pending','Recorded on #passed-and-pending','var(--passed)'],
   ['done','Done','var(--canceled)']
 ];
@@ -154,7 +154,7 @@ function cardHTML(p){
     p.vote_result&&p.vote_result!=='unknown'?`Result: ${esc(p.vote_result)}`:''
   ].filter(Boolean).join(' · ');
   return `<article class="card">
-    <span class="pill" style="background:${colColor}">${esc(p.status||'New Proposals')}</span>
+    <span class="pill" style="background:${colColor}">${esc(p.status||'To Present')}</span>
     <h3>${esc(p.name||p.id)}</h3>
     <div class="meta"><div>Author: ${esc(p.author||'—')}</div>${poster}</div>
     ${summary?`<ul class="summary">${summary}</ul>`:''}
@@ -200,7 +200,7 @@ async function load(){
     const buckets={}; COLUMNS.forEach(c=>buckets[c[0]]=[]);
     const extra=[];
     proposals.forEach(p=>{
-      const s=(p.status||'New Proposals').toLowerCase();
+      const s=(p.status||'To Present').toLowerCase();
       if(buckets[s]) buckets[s].push(p);
       else { let b=extra.find(e=>e.key===s); if(!b){b={key:s,list:[]};extra.push(b);} b.list.push(p); }
     });
@@ -258,8 +258,8 @@ function buildAgenda(){
   const section=list=>list.length
     ? list.map(formatProposal).join('\n\n')
     : '*None*';
-  const votes=current.filter(p=>(p.status||'').toLowerCase()==='discussed in senate');
-  const discussion=current.filter(p=>(p.status||'').toLowerCase()==='new proposals');
+  const votes=current.filter(p=>(p.status||'').toLowerCase()==='up for vote');
+  const discussion=current.filter(p=>(p.status||'').toLowerCase()==='to present');
 
   const agenda=[
     `# Senate Date: ${formattedDate}`,
