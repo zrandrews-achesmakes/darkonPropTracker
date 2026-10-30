@@ -191,6 +191,35 @@ found, say so briefly and stay quiet otherwise.
 Exception: scheduled runs stay silent either way (per the cron job's own
 instructions) — no chat report on success.
 
+### Senate results reports
+
+When reporting the outcome of a Senate to Zachary (set by him
+2026-10-06):
+
+- No "still pending" section.
+- Each passed proposal gets its summary bullets plus its Google Doc
+  link.
+
+EasyPoll result messages are not readable by the bot, so vote outcomes
+enter the tracker only from Zachary's word or his screenshots of the
+results — never inferred.
+
+## Scheduled runs
+
+The recurring run is the cron job `darkon-weekly-proposal-review`:
+Saturdays at 01:00 America/New_York. Its full instruction text is
+mirrored in `pipeline/cron.md`. The rules that live in the job itself:
+
+- **Run silently.** No chat message on success, whether or not new
+  proposals are found. Surface a run only when it cannot complete and
+  needs Zachary's action (auth rejected, a step blocked on him).
+- **Scan window:** `scan_since_override` when set (one-shot, cleared
+  after use), otherwise `last_review`; the first-ever run starts at
+  2026-08-01T00:00:00-04:00.
+- **Before using the discord skill,** re-read its SKILL.md in case it
+  changed.
+- **Push message:** `weekly proposal review`.
+
 ## Auth
 - Discord: the `discord` skill; credential in Secure Vault as `custom.discord`
   (read-only bot).
@@ -205,4 +234,7 @@ instructions) — no chat report on success.
 - `history.json` — audit trail of proposal events (`created`, `baseline`, `status_change`, `field_update`).
 - The public board (`docs/index.html`, served via GitHub Pages) reads
   the proposal JSONs live on each load; it is display-only — all writes
-  happen through this workflow.
+  happen through this workflow. It is the only display: a separate
+  Darkon Board Editor web app existed briefly and was deleted on
+  2026-10-30 at Zachary's direction after it under-reported proposals —
+  do not rebuild or re-propose it unless Zachary asks anew.
