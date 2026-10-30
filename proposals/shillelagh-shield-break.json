@@ -19,6 +19,8 @@
     "At rank 10+, Shillelagh also functions like Create/Destroy Magic Weapon.",
     "Clarifies Shield Break calls, damage colors, and tape markings."
   ],
-  "vote_result": null,
+  "vote_result": [
+    "withdrawn"
+  ],
   "voted_at_senate": null
 }
