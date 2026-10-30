@@ -20,6 +20,9 @@
     "Standardizes 'stored/held' terminology to 'pouched'.",
     "Still one pouched spell at a time, and only the caster can invoke it."
   ],
-  "vote_result": "passed",
+  "vote_result": [
+    "passed_senate",
+    "passed_bod"
+  ],
   "voted_at_senate": "2026-10-03"
 }
