@@ -18,6 +18,6 @@
     "answer-2": "No",
     "answer-3": "Abstain"
   },
-  "line_item_rule": "If the proposal has separable line items needing their own votes, generate one poll block per line item (the question names the line item) instead of a single combined block. Call the line items out after the summary bullets.",
+  "line_item_rule": "Line items exist ONLY when the proposal document itself explicitly calls out a change as a 'line item' to vote on (rule set by Zachary 2026-10-30). Then generate one poll block per designated line item (the question names the line item) and call them out after the summary bullets. If the document designates no line items, generate a single all-or-nothing poll block for the whole proposal — never infer line items from separable structure.",
   "prefix": "/poll "
 }
