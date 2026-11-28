@@ -3,13 +3,18 @@
   "discord_post_url": "https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724",
   "doc_url": "https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing",
   "easypoll_blocks": [
-    "/poll question: Monk/Rogue Class Tweaks by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
+    "/poll question: Monk/Rogue Class Tweaks by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain",
+    "/poll question: Monk/Rogue Class Tweaks: Line Item 1 — Earthquake Relic by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain",
+    "/poll question: Monk/Rogue Class Tweaks: Line Item 2 — Evasion by cairo\ntext:\nAuthor: cairo\nPost: https://discord.com/channels/766364534495117383/1286801164326797385/1564414593269235724\nDoc: <https://docs.google.com/document/d/1vHBgdi_ghIrJmUNW1aaz6khzHkt2noKLyHsBTl26RbY/edit?usp=sharing>\nanswer-1: Yes\nanswer-2: No\nanswer-3: Abstain"
   ],
   "github_issue_url": "https://github.com/zrandrews-achesmakes/darkonPropTracker/issues/10",
   "id": "monk-rogue-class-tweaks",
-  "line_items": [],
+  "line_items": [
+    "Line Item 1 — Earthquake relic",
+    "Line Item 2 — Evasion skill change"
+  ],
   "name": "Monk/Rogue Class Tweaks",
-  "notes": "Posted to #proposal-discussions on 2026-10-26 as 'Monk/Rogue Tweaks' (document title: 'Monk/Rogue Class Tweaks'). The document bundles several changes (Monk Slow Fall, Chi Block with an open hand, Freedom of Movement replacing Evasion for Monks, Evasion's 60-second rest cooldown, fortification falling damage, and the Earthquake relic) but does not designate any of them as line-item votes, so per Zachary's 2026-10-30 rule it is tracked as a single all-or-nothing poll. Wording flag from the doc read: the Intent summary describes the Chi Block change as a foot option, but the operative proposed wording says an open hand. In the discussion thread cairo said he is open to sections being voted as line items, but the document itself does not call any out. Rationale in the doc: give Monks different flavor and class utility; the fortification rule codifies a long-played practice; no substantive rationale is stated for the Evasion change.",
+  "notes": "Posted to #proposal-discussions on 2026-10-26 as 'Monk/Rogue Tweaks' (document title: 'Monk/Rogue Class Tweaks'). The document now explicitly designates two line items (confirmed on the 2026-11-28 weekly re-read; on 2026-10-30 it designated none): Line Item 1, the Earthquake relic, and Line Item 2, the Evasion skill change — each voted separately from the main proposal. Per Zachary's 2026-10-30 rule the poll is now one block for the main proposal plus one block per designated line item. Wording flag from the doc read: the Intent summary describes the Chi Block change as a foot option, but the operative proposed wording says an open hand. Rationale in the doc: give Monks different flavor and class utility; the fortification rule codifies a long-played practice; no substantive rationale is stated for the Evasion change.",
   "posted_at": "2026-10-26T23:05:04Z",
   "posted_by": "cairo",
   "posted_by_username": "cairo0013",

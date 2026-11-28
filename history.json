@@ -672,6 +672,16 @@
       "field": "easypoll_blocks",
       "actor": "zachary",
       "note": "Summary block removed from the poll block text at Zachary's direction on 2026-10-30: poll text now carries author, post link, and doc link only (summaries remain in the record and on the board cards)."
+    },
+    {
+      "at": "2026-11-28T06:05:19Z",
+      "proposal_id": "monk-rogue-class-tweaks",
+      "type": "field_update",
+      "field": "line_items/easypoll_blocks",
+      "from": "no line items; 1 all-or-nothing poll block",
+      "to": "2 designated line items; 3 poll blocks (main proposal + 1 per line item)",
+      "actor": "workflow",
+      "note": "Weekly review 2026-11-28 re-read the document: it now explicitly labels 'Line Item 1:' (Earthquake relic) and 'Line Item 2:' (Evasion skill change; the line item only addresses the change to the Evasion skill, Evasion's removal from Monk is in the main prop). On 2026-10-30 the document designated no line items. Summary bullets unchanged; GitHub issue #10 body updated to match. The main-proposal block is retained alongside the two line-item blocks because the document refers to 'the main prop' as a distinct votable item."
     }
   ]
 }
